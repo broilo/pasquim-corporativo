@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>O Pasquim Corporativo - Edição #001</title>
+    <style>
+      /* ESTILOS GERAIS - MAIS COMPACTOS */
+      .newspaper-layout {
+        width: 950px; /* Ligeiramente menor para caber melhor */
+        margin: 0 auto;
+        font-family: "Times New Roman", Times, serif;
+        background-color: #fff;
+        color: #222;
+        padding: 20px;
+        border: 2px solid #1a1a1a;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        line-height: 1.4;
+      }
+
+      .newspaper-header {
+        text-align: center;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 3px double #333;
+      }
+
+      .header-top {
+        display: flex;
+        justify-content: space-between;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 5px;
+        color: #666;
+      }
+
+      .newspaper-title {
+        font-family: "Libre Baskerville", Georgia, serif;
+        font-size: 60px;
+        font-weight: 900;
+        letter-spacing: 2px;
+        margin: 10px 0 3px 0;
+        line-height: 0.95;
+        color: #1a1a1a;
+      }
+
+      .header-subtitle {
+        display: flex;
+        flex-direction: column;
+        font-size: 12px;
+        margin-top: 5px;
+        color: #444;
+      }
+
+      .subtitle-line {
+        font-style: italic;
+        letter-spacing: 0.5px;
+      }
+
+      .date-line {
+        font-weight: bold;
+        margin-top: 3px;
+        font-size: 11px;
+        color: #333;
+      }
+
+      /* LINHAS DIVISÓRIAS */
+      .divider-thick {
+        border: none;
+        border-top: 5px solid #222;
+        margin: 15px 0;
+      }
+
+      .divider-thin {
+        border: none;
+        border-top: 1px solid #ccc;
+        margin: 12px 0;
+      }
+
+      /* MANCHETE PRINCIPAL - MAIS COMPACTA */
+      .main-headline {
+        margin-bottom: 25px;
+        background: linear-gradient(to right, #f8f8f8, #fff);
+        padding: 15px;
+        border-radius: 3px;
+        border-left: 4px solid #b30000;
+      }
+
+      .headline-tag {
+        font-size: 12px;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #b30000;
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+        display: inline-block;
+        background: #ffebee;
+        padding: 3px 8px;
+        border-radius: 2px;
+      }
+
+      .headline-title {
+        font-family: Georgia, serif;
+        font-size: 36px;
+        font-weight: bold;
+        line-height: 1.1;
+        margin: 10px 0;
+        color: #1a1a1a;
+      }
+
+      .headline-subtitle {
+        font-size: 17px;
+        line-height: 1.3;
+        color: #333;
+        margin-top: 10px;
+      }
+
+      .highlight-text {
+        background-color: #fff9e6;
+        padding: 10px 12px;
+        border-left: 3px solid #ffb300;
+        margin-top: 12px;
+        font-size: 16px;
+        border-radius: 0 3px 3px 0;
+      }
+
+      /* LAYOUT DE DUAS COLUNAS COM MAIS CONTEÚDO */
+      .two-column-layout {
+        display: flex;
+        gap: 25px;
+        margin-bottom: 25px;
+      }
+
+      .column {
+        flex: 1;
+      }
+
+      /* NOTÍCIAS COMPACTAS */
+      .news-item {
+        margin-bottom: 25px;
+        padding-bottom: 15px;
+        border-bottom: 1px dashed #ddd;
+      }
+
+      .section-title {
+        font-family: Georgia, serif;
+        font-size: 20px;
+        font-weight: bold;
+        text-transform: uppercase;
+        border-bottom: 2px solid #222;
+        padding-bottom: 6px;
+        margin-bottom: 12px;
+        color: #1a1a1a;
+        letter-spacing: 0.5px;
+      }
+
+      .news-title {
+        font-family: Georgia, serif;
+        font-size: 19px;
+        font-weight: bold;
+        margin-bottom: 8px;
+        color: #1a1a1a;
+        line-height: 1.2;
+      }
+
+      .news-text {
+        font-size: 15px;
+        line-height: 1.5;
+        text-align: justify;
+        color: #333;
+      }
+
+      /* NOTÍCIA DA ÁGUA COMPACTA */
+      .water-crisis-alert {
+        background: linear-gradient(135deg, #e6f7ff 0%, #f0f9ff 100%);
+        border: 1px solid #1890ff;
+        border-radius: 5px;
+        padding: 15px;
+        margin: 15px 0;
+        position: relative;
+      }
+
+      .water-crisis-alert::before {
+        content: "💧";
+        position: absolute;
+        font-size: 50px;
+        right: 15px;
+        top: 15px;
+        opacity: 0.15;
+        transform: rotate(15deg);
+      }
+
+      .alert-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .alert-icon {
+        font-size: 20px;
+        margin-right: 8px;
+        color: #1890ff;
+      }
+
+      .alert-title {
+        font-family: Georgia, serif;
+        font-size: 18px;
+        font-weight: bold;
+        color: #0056b3;
+        margin: 0;
+      }
+
+      .crisis-stats {
+        display: flex;
+        justify-content: space-between;
+        margin: 15px 0;
+        gap: 10px;
+      }
+
+      .crisis-stat {
+        flex: 1;
+        padding: 8px;
+        background: white;
+        border-radius: 4px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        border: 1px solid #e0e0e0;
+        text-align: center;
+      }
+
+      .stat-number {
+        font-size: 22px;
+        font-weight: bold;
+        color: #1890ff;
+        display: block;
+      }
+
+      .stat-label {
+        font-size: 11px;
+        color: #666;
+        margin-top: 3px;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+      }
+
+      .impact-list {
+        background: white;
+        padding: 12px;
+        border-radius: 4px;
+        margin: 12px 0;
+        border-left: 3px solid #52c41a;
+      }
+
+      .impact-list h5 {
+        margin: 0 0 8px 0;
+        color: #52c41a;
+        font-size: 15px;
+      }
+
+      .impact-list ul {
+        margin: 5px 0;
+        padding-left: 18px;
+      }
+
+      .impact-list li {
+        margin-bottom: 6px;
+        color: #333;
+        font-size: 14px;
+        line-height: 1.3;
+      }
+
+      /* CLASSIFICADOS MAIS DENSOS */
+      .classified {
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      .classified p {
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px dotted #ccc;
+        position: relative;
+        padding-left: 22px;
+      }
+
+      .classified p::before {
+        content: "📌";
+        position: absolute;
+        left: 0;
+        top: 0;
+        font-size: 13px;
+      }
+
+      /* RODAPÉ COMPACTO */
+      .newspaper-footer {
+        font-size: 12px;
+        margin-top: 25px;
+        padding-top: 12px;
+        border-top: 2px solid #ddd;
+      }
+
+      .disclaimer {
+        background-color: #fff5f5;
+        padding: 12px;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        text-align: center;
+        border: 1px dashed #ff4d4f;
+        font-size: 13px;
+        color: #666;
+        line-height: 1.4;
+      }
+
+      .meme-tag {
+        text-align: center;
+        font-weight: bold;
+        color: #333;
+        letter-spacing: 1px;
+        font-size: 13px;
+        padding: 8px;
+        background: #f9f9f9;
+        border-radius: 3px;
+      }
+
+      /* ELEMENTOS VISUAIS COMPACTOS */
+      .fake-quote {
+        font-style: italic;
+        color: #555;
+        border-left: 3px solid #999;
+        padding: 10px 0 10px 12px;
+        margin: 12px 0;
+        font-size: 15px;
+        background: #f9f9f9;
+        border-radius: 0 3px 3px 0;
+        line-height: 1.3;
+      }
+
+      .quote-author {
+        display: block;
+        text-align: right;
+        font-weight: bold;
+        color: #333;
+        margin-top: 3px;
+        font-size: 13px;
+      }
+
+      /* AJUSTES PARA MAIS CONTEÚDO */
+      .compact {
+        margin-bottom: 5px !important;
+      }
+
+      .tight {
+        line-height: 1.3 !important;
+      }
+
+      /* RESPONSIVIDADE */
+      @media (max-width: 1000px) {
+        .newspaper-layout {
+          width: 95%;
+          padding: 15px;
+        }
+
+        .two-column-layout {
+          flex-direction: column;
+          gap: 20px;
+        }
+
+        .newspaper-title {
+          font-size: 48px;
+        }
+
+        .headline-title {
+          font-size: 30px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="newspaper-layout">
+      <!-- CABEÇALHO -->
+      <header class="newspaper-header">
+        <div class="header-top">
+          <span class="edition-info"
+            >EDIÇÃO SEMANAL • NOTÍCIAS 100% VEROSSÍMEIS</span
+          >
+          <span class="edition-number">EDIÇÃO #001</span>
+        </div>
+        <h1 class="newspaper-title">O PASQUIM CORPORATIVO</h1>
+        <div class="header-subtitle">
+          <span class="subtitle-line"
+            >O ÚNICO JORNAL QUE ENTENDE A SINERGIA DO ABSURDO</span
+          >
+          <span class="date-line"
+            >SEXTA-FEIRA, 30 DE JANEIRO DE 2026 •
+            broilo.github.io/pasquim-corporativo/</span
+          >
+        </div>
+      </header>
+
+      <hr class="divider-thick" />
+
+      <!-- MANCHETE PRINCIPAL -->
+      <section class="main-headline">
+        <div class="headline-tag">EXCLUSIVO • PENSAMENTO DISRUPTIVO</div>
+        <h2 class="headline-title">
+          CEO SUBSTITUI REUNIÕES POR SESSÕES DE TELEPATIA COLETIVA
+        </h2>
+        <div class="headline-subtitle">
+          <p>
+            "O silêncio é a nova agenda" diz líder, enquanto colaboradores
+            relatam ouvir apenas seus próprios pensamentos de autossabotagem.
+          </p>
+          <div class="highlight-text">
+            <strong>PESQUISA INTERNA REVELA:</strong> 120% de aumento em
+            "sensação de sinergia", mas 0% em produtividade real. Investidores
+            consideram meditação obrigatória como próximo benefício corporativo.
+          </div>
+        </div>
+      </section>
+
+      <!-- LAYOUT DE DUAS COLUNAS -->
+      <div class="two-column-layout">
+        <!-- COLUNA DA ESQUERDA -->
+        <div class="column">
+          <article class="news-item">
+            <h3 class="section-title">ECONOMIA & NEGÓCIOS</h3>
+            <h4 class="news-title">
+              Ações de empresa que vende cafezinho amargo disparam 450%
+            </h4>
+            <p class="news-text">
+              Após CEO declarar em rede social que "o crescimento precisa doer",
+              investidores interpretaram como nova filosofia de gestão. Fundos
+              de hedge agora buscam empresas com produtos intragáveis.
+            </p>
+            <div class="fake-quote">
+              "Quanto pior o gosto, melhor o retorno. Estamos migrando de 'buy
+              the dip' para 'buy the bitter'"
+              <span class="quote-author">— Analista do BTG Pactual Memes</span>
+            </div>
+          </article>
+
+          <!-- NOTÍCIA DA ÁGUA -->
+          <article class="news-item">
+            <h3 class="section-title">TECNOLOGIA & SUSTENTABILIDADE</h3>
+
+            <div class="water-crisis-alert">
+              <div class="alert-header">
+                <div class="alert-icon">⚠️</div>
+                <h4 class="alert-title">
+                  ALERTA GLOBAL: CRISE HÍDRICA AMEAÇA INTELIGÊNCIA ARTIFICIAL
+                </h4>
+              </div>
+
+              <p class="news-text">
+                <strong>Big Techs emitem comunicado conjunto:</strong> "Se as
+                pessoas continuarem bebendo água nesse ritmo, ficaremos sem
+                inteligência artificial em breve."
+              </p>
+
+              <div class="crisis-stats">
+                <div class="crisis-stat">
+                  <span class="stat-number">1.8L</span>
+                  <span class="stat-label">Consumo diário médio</span>
+                </div>
+                <div class="crisis-stat">
+                  <span class="stat-number">-30%</span>
+                  <span class="stat-label">IA disponível até 2025</span>
+                </div>
+                <div class="crisis-stat">
+                  <span class="stat-number">$0.00</span>
+                  <span class="stat-label">Custo por gole não monitorado</span>
+                </div>
+              </div>
+
+              <div class="impact-list">
+                <h5>IMPACTOS DIRETOS NA IA:</h5>
+                <ul>
+                  <li>
+                    ChatGPT começará a responder apenas em horários com baixa
+                    demanda hídrica
+                  </li>
+                  <li>
+                    Data centers serão realocados para desertos "para incentivar
+                    a moderação"
+                  </li>
+                  <li>
+                    Novos modelos treinados com 40% menos parâmetros "por
+                    economia"
+                  </li>
+                  <li>
+                    Cada prompt no Midjourney custará 500ml da sua cota diária
+                  </li>
+                </ul>
+              </div>
+
+              <p class="news-text">
+                A solução proposta? <strong>"Hydro-Ration AI"</strong> - sistema
+                que bloqueia seu acesso à nuvem quando seus níveis de hidratação
+                estão "acima do necessário para a sobrevivência corporativa".
+              </p>
+            </div>
+          </article>
+        </div>
+
+        <!-- COLUNA DA DIREITA -->
+        <div class="column">
+          <article class="news-item">
+            <h3 class="section-title">CARREIRA & DESENVOLVIMENTO</h3>
+            <h4 class="news-title">
+              Curso "Como falar em reuniões sem dizer nada" esgota em 2 minutos
+            </h4>
+            <p class="news-text">
+              Módulos incluem: "Dominando o 'vamos dar uma circulada nisso'",
+              "Técnicas de concordância entusiástica" e "Como alongar 30
+              segundos de conteúdo em 45 minutos".
+            </p>
+            <p class="news-text compact">
+              O curso avançado ensina a criar slides com muitas palavras e pouca
+              informação: "O segredo está no tamanho da fonte - quanto menor,
+              mais profundo parece".
+            </p>
+          </article>
+
+          <article class="news-item">
+            <h3 class="section-title">CLASSIFICADOS ABSURDOS</h3>
+            <div class="classified">
+              <p>
+                <strong>PROCURA-SE:</strong> Profissional com 20 anos de
+                experiência em React Native (tecnologia lançada em 2015).
+                Salário: R$ 2.500 PJ + vale-refeição que só funciona em
+                restaurantes veganos de terça-feira.
+              </p>
+
+              <p>
+                <strong>OFEREÇO:</strong> Mentorias sobre como trabalhar 18h/dia
+                sem reclamar. Aceito troca por curso de meditação ou certificado
+                de qualquer coisa. Especialista em transformar burnout em
+                "resiliência narrativa".
+              </p>
+
+              <p>
+                <strong>VENDE-SE:</strong> 500 certificados de "curso de
+                liderança" nunca abertos. Ideal para turbinar LinkedIn. Inclui
+                template de post sobre "lições aprendidas" que você não
+                aprendeu.
+              </p>
+
+              <p class="compact">
+                <strong>ALUGA-SE:</strong> Consultor que fala inglês com sotaque
+                britânico para impressionar em reuniões. Cobro por minuto de
+                "hmm, interesting point". Pacote premium inclui "let me
+                challenge that assumption".
+              </p>
+            </div>
+          </article>
+
+          <article class="news-item">
+            <h3 class="section-title">INOVAÇÃO EMPRESARIAL</h3>
+            <h4 class="news-title">
+              Startup lança software que mede "nível de propósito" dos
+              funcionários
+            </h4>
+            <p class="news-text">
+              O "PurposeTracker" usa webcams para analisar microexpressões
+              durante reuniões e atribui score de 0 a 100 de "alinhamento com o
+              propósito da empresa".
+            </p>
+            <div class="fake-quote">
+              "Descobrimos que sorrir quando o CEO fala de 'legado' aumenta em
+              15 pontos. Piscar muito sinaliza dúvida existencial."
+              <span class="quote-author">— CTO da startup</span>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- RODAPÉ -->
+      <footer class="newspaper-footer">
+        <hr class="divider-thin" />
+        <div class="disclaimer">
+          ⚠️ <strong>IMPORTANTE SABER (OU NÃO):</strong> Este jornal é uma obra
+          de ficção satírica. Todas as notícias são inventadas para fins de
+          entretenimento e crítica social leve. Nenhum CEO foi realmente
+          substituído por telepatia (ainda). Consulte seu humorista de confiança
+          antes de acreditar em qualquer coisa.
+        </div>
+        <div class="meme-tag">
+          #PasquimCorporativo | #HumorQueDóiDeVerdade | #SextouNoLinkedIn |
+          #FakeNewsDeQualidade
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      // CÓDIGO DE DATAS - COM MODO DE TESTE PARA AGORA
+      document.addEventListener("DOMContentLoaded", function () {
+        const today = new Date();
+        const dateElements = document.querySelectorAll(".date-line");
+
+        // MODIFICAÇÃO IMPORTANTE: Para teste AGORA (2024), use data fixa
+        // Quando for 2026, remova este bloco e use o cálculo real abaixo
+        const TEST_MODE = true; // Mude para false em 2026
+
+        if (TEST_MODE) {
+          // MODO TESTE: Mostra data fictícia para preview
+          dateElements.forEach((el) => {
+            el.textContent =
+              "SEXTA-FEIRA, 30 DE JANEIRO DE 2026 • broilo.github.io/pasquim-corporativo/";
+          });
+
+          const editionElement = document.querySelector(".edition-number");
+          if (editionElement) {
+            editionElement.textContent = "EDIÇÃO #001";
+          }
+
+          console.log("🔧 MODO TESTE ATIVADO");
+          console.log("Para produção em 2026: Mude TEST_MODE para false");
+        } else {
+          // MODO PRODUÇÃO (use a partir de 30/01/2026)
+
+          // Atualiza data real
+          dateElements.forEach((el) => {
+            const originalText = "30 DE JANEIRO DE 2026";
+            const newDate = today
+              .toLocaleDateString("pt-BR", {
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })
+              .toUpperCase();
+
+            if (el.textContent.includes(originalText)) {
+              el.textContent = el.textContent.replace(originalText, newDate);
+            }
+          });
+
+          // Cálculo real da edição
+          const startDate = new Date("2026-01-30");
+          const diffTime = Math.abs(today - startDate);
+          const diffWeeks = Math.ceil(diffTime / (1000 * 60 * 60 * 24 * 7));
+
+          const editionElement = document.querySelector(".edition-number");
+          if (editionElement) {
+            editionElement.textContent = `EDIÇÃO #${diffWeeks.toString().padStart(3, "0")}`;
+          }
+        }
+      });
+    </script>
+    <footer
+      style="
+        margin-top: 40px;
+        text-align: center;
+        padding: 20px;
+        border-top: 1px solid #ddd;
+      "
+    >
+      <p>
+        <a href="arquivo.html">📚 Ver todas as edições anteriores</a> |
+        <a href="#top">↑ Topo</a>
+      </p>
+      <p style="font-size: 12px; color: #666">
+        © 2026 O Pasquim Corporativo • Toda sexta tem edição nova
+      </p>
+    </footer>
+  </body>
+</html>

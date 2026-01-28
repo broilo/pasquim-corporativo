@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arquivo - O Pasquim Corporativo</title>
+    <style>
+      /* ESTILOS DO ARQUIVO */
+      .arquivo-layout {
+        width: 900px;
+        margin: 0 auto;
+        font-family: "Times New Roman", Times, serif;
+        padding: 20px;
+      }
+
+      .arquivo-header {
+        text-align: center;
+        margin-bottom: 30px;
+        border-bottom: 3px double #333;
+        padding-bottom: 15px;
+      }
+
+      .arquivo-title {
+        font-family: "Libre Baskerville", Georgia, serif;
+        font-size: 48px;
+        font-weight: 900;
+        margin: 20px 0;
+      }
+
+      .edicoes-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+        margin: 30px 0;
+      }
+
+      .edicao-card {
+        background: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        transition: transform 0.3s;
+        cursor: pointer;
+      }
+
+      .edicao-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        background: #fff;
+      }
+
+      .edicao-numero {
+        font-size: 14px;
+        color: #b30000;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      .edicao-data {
+        font-size: 12px;
+        color: #666;
+        margin-bottom: 10px;
+      }
+
+      .edicao-titulo {
+        font-family: Georgia, serif;
+        font-size: 18px;
+        font-weight: bold;
+        margin: 10px 0;
+        line-height: 1.3;
+      }
+
+      .edicao-manchete {
+        font-size: 14px;
+        color: #333;
+        line-height: 1.4;
+        margin-bottom: 15px;
+      }
+
+      .btn-ler {
+        display: inline-block;
+        background: #b30000;
+        color: white;
+        padding: 8px 15px;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 14px;
+        transition: background 0.3s;
+      }
+
+      .btn-ler:hover {
+        background: #990000;
+      }
+
+      .voltar-home {
+        display: block;
+        text-align: center;
+        margin: 40px 0;
+        color: #666;
+        text-decoration: none;
+      }
+
+      .voltar-home:hover {
+        color: #b30000;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="arquivo-layout">
+      <header class="arquivo-header">
+        <h1 class="arquivo-title">📚 ARQUIVO COMPLETO</h1>
+        <p>Todas as edições d'O Pasquim Corporativo em um só lugar</p>
+        <p><small>Clique em qualquer edição para ler na íntegra</small></p>
+      </header>
+
+      <div class="edicoes-grid" id="edicoesContainer">
+        <!-- As edições serão carregadas aqui pelo JavaScript -->
+        <div class="loading">Carregando edições...</div>
+      </div>
+
+      <a href="index.html" class="voltar-home">← Voltar para a edição atual</a>
+
+      <footer
+        style="
+          text-align: center;
+          margin-top: 50px;
+          font-size: 12px;
+          color: #666;
+        "
+      >
+        <p>
+          O Pasquim Corporativo • Todas as sextas-feiras • Humor que dói de
+          verdade
+        </p>
+      </footer>
+    </div>
+
+    <script>
+      // BANCO DE DADOS DAS EDIÇÕES
+      const edicoes = [
+        {
+          numero: "001",
+          data: "30/01/2026",
+          titulo: "CEO Substitui Reuniões por Telepatia",
+          manchete:
+            "Líder diz que 'silêncio é a nova agenda' enquanto colaboradores ouvem apenas pensamentos de autossabotagem.",
+          arquivo: "edicoes/20260130_ed001.html",
+          destaque: "Pesquisa revela 120% de aumento em 'sensação de sinergia'",
+        },
+        // Adicione novas edições aqui
+      ];
+
+      // FUNÇÃO PARA RENDERIZAR EDIÇÕES
+      function renderizarEdicoes() {
+        const container = document.getElementById("edicoesContainer");
+        container.innerHTML = "";
+
+        // Ordena do mais recente para o mais antigo
+        edicoes
+          .sort((a, b) => b.numero - a.numero)
+          .forEach((edicao) => {
+            const card = document.createElement("div");
+            card.className = "edicao-card";
+            card.innerHTML = `
+                    <div class="edicao-numero">EDIÇÃO #${edicao.numero.padStart(3, "0")}</div>
+                    <div class="edicao-data">${edicao.data}</div>
+                    <h3 class="edicao-titulo">${edicao.titulo}</h3>
+                    <p class="edicao-manchete">${edicao.manchete}</p>
+                    <p><small><strong>Destaque:</strong> ${edicao.destaque}</small></p>
+                    <a href="${edicao.arquivo}" class="btn-ler">Ler edição completa →</a>
+                `;
+            container.appendChild(card);
+          });
+      }
+
+      // CARREGAR AO ABRIR A PÁGINA
+      document.addEventListener("DOMContentLoaded", renderizarEdicoes);
+    </script>
+  </body>
+</html>
