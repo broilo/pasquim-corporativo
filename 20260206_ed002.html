@@ -1,0 +1,806 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>O Pasquim Corporativo</title>
+    <style>
+      /* ESTILOS GERAIS - MANTIDOS IGUAIS */
+      .newspaper-layout {
+        width: 950px;
+        margin: 0 auto;
+        font-family: "Times New Roman", Times, serif;
+        background-color: #fff;
+        color: #222;
+        padding: 20px;
+        border: 2px solid #1a1a1a;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        line-height: 1.4;
+      }
+
+      .newspaper-header {
+        text-align: center;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 3px double #333;
+      }
+
+      .header-top {
+        display: flex;
+        justify-content: space-between;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 5px;
+        color: #666;
+      }
+
+      .newspaper-title {
+        font-family: "Libre Baskerville", Georgia, serif;
+        font-size: 60px;
+        font-weight: 900;
+        letter-spacing: 2px;
+        margin: 10px 0 3px 0;
+        line-height: 0.95;
+        color: #1a1a1a;
+      }
+
+      .header-subtitle {
+        display: flex;
+        flex-direction: column;
+        font-size: 12px;
+        margin-top: 5px;
+        color: #444;
+      }
+
+      .subtitle-line {
+        font-style: italic;
+        letter-spacing: 0.5px;
+      }
+
+      .date-line {
+        font-weight: bold;
+        margin-top: 3px;
+        font-size: 11px;
+        color: #333;
+      }
+
+      /* LINHAS DIVISÓRIAS */
+      .divider-thick {
+        border: none;
+        border-top: 5px solid #222;
+        margin: 15px 0;
+      }
+
+      .divider-thin {
+        border: none;
+        border-top: 1px solid #ccc;
+        margin: 12px 0;
+      }
+
+      /* MANCHETE PRINCIPAL */
+      .main-headline {
+        margin-bottom: 25px;
+        background: linear-gradient(to right, #f8f8f8, #fff);
+        padding: 15px;
+        border-radius: 3px;
+        border-left: 4px solid #b30000;
+      }
+
+      .headline-tag {
+        font-size: 12px;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #b30000;
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+        display: inline-block;
+        background: #ffebee;
+        padding: 3px 8px;
+        border-radius: 2px;
+      }
+
+      .headline-title {
+        font-family: Georgia, serif;
+        font-size: 36px;
+        font-weight: bold;
+        line-height: 1.1;
+        margin: 10px 0;
+        color: #1a1a1a;
+      }
+
+      .headline-subtitle {
+        font-size: 17px;
+        line-height: 1.3;
+        color: #333;
+        margin-top: 10px;
+      }
+
+      .highlight-text {
+        background-color: #fff9e6;
+        padding: 10px 12px;
+        border-left: 3px solid #ffb300;
+        margin-top: 12px;
+        font-size: 16px;
+        border-radius: 0 3px 3px 0;
+      }
+
+      /* LAYOUT DE DUAS COLUNAS */
+      .two-column-layout {
+        display: flex;
+        gap: 25px;
+        margin-bottom: 25px;
+      }
+
+      .column {
+        flex: 1;
+      }
+
+      /* NOTÍCIAS */
+      .news-item {
+        margin-bottom: 25px;
+        padding-bottom: 15px;
+      }
+
+      .section-title {
+        font-family: Georgia, serif;
+        font-size: 20px;
+        font-weight: bold;
+        text-transform: uppercase;
+        border-bottom: 2px solid #222;
+        padding-bottom: 6px;
+        margin-bottom: 12px;
+        color: #1a1a1a;
+        letter-spacing: 0.5px;
+      }
+
+      .news-title {
+        font-family: Georgia, serif;
+        font-size: 19px;
+        font-weight: bold;
+        margin-bottom: 8px;
+        color: #1a1a1a;
+        line-height: 1.2;
+      }
+
+      .news-text {
+        font-size: 15px;
+        line-height: 1.5;
+        text-align: justify;
+        color: #333;
+      }
+
+      /* NOTÍCIA PEQUENA - AGORA NA PRIMEIRA COLUNA */
+      .small-news {
+        background: #f0f8ff;
+        padding: 15px;
+        border-radius: 5px;
+        margin: 15px 0;
+        border: 1px solid #d6e4ff;
+        border-left: 4px solid #1890ff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      }
+
+      .small-news-title {
+        font-family: Georgia, serif;
+        font-size: 17px;
+        font-weight: bold;
+        margin-bottom: 8px;
+        color: #1890ff;
+      }
+
+      .small-news-text {
+        font-size: 14px;
+        line-height: 1.4;
+        color: #555;
+      }
+
+      .small-news-highlight {
+        background: #e6f7ff;
+        padding: 8px 10px;
+        border-radius: 3px;
+        margin-top: 8px;
+        font-size: 13px;
+        color: #0050b3;
+        border-left: 2px solid #1890ff;
+      }
+
+      /* ALERTAS/BOXES ESPECIAIS */
+      .special-alert {
+        background: linear-gradient(135deg, #f0f9ff 0%, #e6f7ff 100%);
+        border: 1px solid #1890ff;
+        border-radius: 5px;
+        padding: 15px;
+        margin: 15px 0;
+        position: relative;
+      }
+
+      .special-alert::before {
+        content: "💡";
+        position: absolute;
+        font-size: 50px;
+        right: 15px;
+        top: 15px;
+        opacity: 0.15;
+        transform: rotate(15deg);
+      }
+
+      .alert-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .alert-icon {
+        font-size: 20px;
+        margin-right: 8px;
+        color: #1890ff;
+      }
+
+      .alert-title {
+        font-family: Georgia, serif;
+        font-size: 18px;
+        font-weight: bold;
+        color: #0056b3;
+        margin: 0;
+      }
+
+      /* ESTATÍSTICAS */
+      .stats-container {
+        display: flex;
+        justify-content: space-between;
+        margin: 15px 0;
+        gap: 10px;
+      }
+
+      .stat-box {
+        flex: 1;
+        padding: 8px;
+        background: white;
+        border-radius: 4px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        border: 1px solid #e0e0e0;
+        text-align: center;
+      }
+
+      .stat-number {
+        font-size: 22px;
+        font-weight: bold;
+        color: #1890ff;
+        display: block;
+      }
+
+      .stat-label {
+        font-size: 11px;
+        color: #666;
+        margin-top: 3px;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+      }
+
+      /* LISTAS DE IMPACTO */
+      .impact-list {
+        background: white;
+        padding: 12px;
+        border-radius: 4px;
+        margin: 12px 0;
+        border-left: 3px solid #52c41a;
+      }
+
+      .impact-list h5 {
+        margin: 0 0 8px 0;
+        color: #52c41a;
+        font-size: 15px;
+      }
+
+      .impact-list ul,
+      .impact-list ol {
+        margin: 5px 0;
+        padding-left: 18px;
+      }
+
+      .impact-list li {
+        margin-bottom: 6px;
+        color: #333;
+        font-size: 14px;
+        line-height: 1.3;
+      }
+
+      /* CLASSIFICADOS */
+      .classified {
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      .classified p {
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px dotted #ccc;
+        position: relative;
+        padding-left: 22px;
+      }
+
+      .classified p::before {
+        content: "📌";
+        position: absolute;
+        left: 0;
+        top: 0;
+        font-size: 13px;
+      }
+
+      /* CITAÇÕES FALSAS */
+      .fake-quote {
+        font-style: italic;
+        color: #555;
+        border-left: 3px solid #999;
+        padding: 10px 0 10px 12px;
+        margin: 12px 0;
+        font-size: 15px;
+        background: #f9f9f9;
+        border-radius: 0 3px 3px 0;
+        line-height: 1.3;
+      }
+
+      .quote-author {
+        display: block;
+        text-align: right;
+        font-weight: bold;
+        color: #333;
+        margin-top: 3px;
+        font-size: 13px;
+      }
+
+      /* RODAPÉ */
+      .newspaper-footer {
+        font-size: 12px;
+        margin-top: 25px;
+        padding-top: 12px;
+        border-top: 2px solid #ddd;
+      }
+
+      .disclaimer {
+        background-color: #fff5f5;
+        padding: 12px;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        text-align: center;
+        border: 1px dashed #ff4d4f;
+        font-size: 13px;
+        color: #666;
+        line-height: 1.4;
+      }
+
+      .meme-tag {
+        text-align: center;
+        font-weight: bold;
+        color: #333;
+        letter-spacing: 1px;
+        font-size: 13px;
+        padding: 8px;
+        background: #f9f9f9;
+        border-radius: 3px;
+      }
+
+      /* RESPONSIVIDADE */
+      @media (max-width: 1000px) {
+        .newspaper-layout {
+          width: 95%;
+          padding: 15px;
+        }
+
+        .two-column-layout {
+          flex-direction: column;
+          gap: 20px;
+        }
+
+        .newspaper-title {
+          font-size: 48px;
+        }
+
+        .headline-title {
+          font-size: 30px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="newspaper-layout">
+      <!-- CABEÇALHO -->
+      <header class="newspaper-header">
+        <div class="header-top">
+          <span class="edition-info"
+            >EDIÇÃO SEMANAL • NOTÍCIAS 100% VEROSSÍMEIS</span
+          >
+          <span class="edition-number">EDIÇÃO #002</span>
+        </div>
+        <h1 class="newspaper-title">O PASQUIM CORPORATIVO</h1>
+        <div class="header-subtitle">
+          <span class="subtitle-line"
+            >O ÚNICO JORNAL QUE ENTENDE A SINERGIA DO ABSURDO</span
+          >
+          <span class="date-line"
+            >SEXTA-FEIRA, 6 DE FEVEREIRO DE 2026 •
+            broilo.github.io/pasquim-corporativo/</span
+          >
+        </div>
+      </header>
+
+      <hr class="divider-thick" />
+
+      <!-- MANCHETE PRINCIPAL COM SUA SUGESTÃO -->
+      <section class="main-headline">
+        <div class="headline-tag">EXCLUSIVO • CONSULTORIA PREMIUM</div>
+        <h2 class="headline-title">
+          Consultoria Cobra R$ 500 mil por Estudo que Conclui: 'É Preciso
+          Trabalhar Para Ganhar Dinheiro'
+        </h2>
+        <div class="headline-subtitle">
+          <p>
+            A McKinsey & Co. divulgou relatório de 300 páginas que, após a
+            análise de dados provenientes de cerca de 15 milhões de fontes não
+            estruturadas, chegou à conclusão revolucionária: organizações
+            produtivas têm mais receita. Clientes afirmam que "o valor está na
+            coragem de dizer o óbvio com gráficos caros".
+          </p>
+          <div class="highlight-text">
+            <strong>DETALHE CHOCANTE:</strong> O estudo de R$ 500 mil será usado
+            por 97% dos clientes apenas como <em>doorstop</em> digital.
+            Consultores envolvidos já foram promovidos.
+          </div>
+        </div>
+      </section>
+
+      <!-- LAYOUT DE DUAS COLUNAS -->
+      <div class="two-column-layout">
+        <!-- COLUNA DA ESQUERDA -->
+        <div class="column">
+          <!-- MATÉRIA 1: META APP -->
+          <article class="news-item">
+            <h3 class="section-title">TECNOLOGIA & ENGAGEMENT</h3>
+            <h4 class="news-title">
+              Meta Lança "RoastMyBoss": App Para Xingamento Anonimizado de
+              Chefes
+            </h4>
+            <p class="news-text">
+              Em parceria com o Great Place to Work, a Meta anunciou o novo
+              aplicativo que promete "revolucionar o engajamento corporativo". A
+              ferramenta permite que funcionários enviem insultos creativos
+              sobre seus superiores, com total anonimato garantido por
+              blockchain.
+            </p>
+
+            <div class="special-alert">
+              <div class="alert-header">
+                <div class="alert-icon">🔥</div>
+                <h4 class="alert-title">COMO FUNCIONA O ROASTMYBOSS</h4>
+              </div>
+              <div class="impact-list">
+                <ul>
+                  <li>
+                    <strong>AI Roast Generator:</strong> ChatGPT gera insultos
+                    com base no perfil do LinkedIn do chefe
+                  </li>
+                  <li>
+                    <strong>Burnout Meter:</strong> Mede o nível de esgotamento
+                    pelo vocabulário usado
+                  </li>
+                  <li>
+                    <strong>Upvote System:</strong> Insultos mais criativos
+                    viram NFTs colecionáveis
+                  </li>
+                  <li>
+                    <strong>Compliance Shield:</strong> Converte palavrões em
+                    "termos de desenvolvimento pessoal"
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="fake-quote">
+              "Percebemos que os funcionários já xingam os chefes no grupo do
+              WhatsApp. Decidimos monetizar esse sentimento e chamar de 'cultura
+              de feedback transparente'."
+              <span class="quote-author"
+                >— Product Manager do Meta Reality Labs</span
+              >
+            </div>
+
+            <p class="news-text">
+              O app já tem lista de espera de 500 empresas. A Meta planeja
+              lançar em breve o <em>RoastMyCEO</em>, versão Enterprise com custo
+              adicional de R$ 50 mil/mês.
+            </p>
+          </article>
+
+          <!-- NOTÍCIA PEQUENA - AGORA NA PRIMEIRA COLUNA -->
+          <article class="small-news">
+            <h4 class="small-news-title">
+              Startup Cobra R$ 199/mês por App que Mostra Quantas Horas Você
+              Perdeu em Reuniões
+            </h4>
+            <p class="small-news-text">
+              O "Meeting Graveyard" calcula o tempo desperdiçado em calls
+              improdutivas e converte em dinheiro perdido. "Ver R$ 47.380
+              evaporados em reuniões sobre reuniões me deu uma crise
+              existencial", diz usuário. A startup, fundada por um ex-consultor
+              traumatizado, já vale US$ 200 milhões.
+            </p>
+            <div class="small-news-highlight">
+              <strong>Funcionalidade premium:</strong> Envia relatório semanal
+              para seu chefe com o título "Custo da Sua Microgestão". Opção
+              "modo passivo-agressivo" custa R$ 50 extra.
+            </div>
+          </article>
+
+          <!-- MATÉRIA 3: HOME OFFICE -->
+          <article class="news-item">
+            <h3 class="section-title">TRABALHO REMOTO & REALIDADES</h3>
+            <h4 class="news-title">
+              Pesquisa Revolucionária: A Pior Coisa do Home Office é Estar em
+              Casa e Ter que Trabalhar
+            </h4>
+            <p class="news-text">
+              Estudo da Fundação Getúlio Vargas com 5.000 profissionais revelou
+              o óbvio ululante: 89% dos entrevistados odeiam a "parte do
+              trabalho" do trabalho remoto. "Acontece que as pessoas gostam do
+              home office, mas detestam a obrigação de produzir algo enquanto
+              estão nele", explica o pesquisador-chefe.
+            </p>
+
+            <div class="stats-container">
+              <div class="stat-box">
+                <span class="stat-number" style="color: #fa8c16">89%</span>
+                <span class="stat-label">Reclamam do "trabalho"</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-number" style="color: #fa8c16">6.2h</span>
+                <span class="stat-label">Tempo em reuniões inúteis</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-number" style="color: #fa8c16">R$ 0</span>
+                <span class="stat-label">Aumento por produtividade</span>
+              </div>
+            </div>
+
+            <div class="fake-quote">
+              "Eu adoro trabalhar de casa! Principalmente a parte de ficar na
+              cama até 10h, fazer almoço demorado e assistir Netflix. O problema
+              são essas demandas profissionais que insistem em aparecer."
+              <span class="quote-author"
+                >— Analista de Marketing Sênior (que pediu para não ser
+                identificado porque está numa call agora)</span
+              >
+            </div>
+          </article>
+        </div>
+
+        <!-- COLUNA DA DIREITA -->
+        <div class="column">
+          <!-- MATÉRIA 4: DEMITIR INSATISFEITOS -->
+          <article class="news-item">
+            <h3 class="section-title">GESTÃO & INOVAÇÃO RADICAL</h3>
+            <h4 class="news-title">
+              Após Pesquisa Revelar 92% de Insatisfação, Empresa Acha Solução
+              Genial: Demitir Todos os Insatisfeitos
+            </h4>
+            <p class="news-text">
+              A startup "TechNonsense" resolveu de forma disruptiva o problema
+              de baixo engajamento: simplesmente demitiu 100% dos funcionários
+              que responderam negativamente à pesquisa anônima de clima.
+              "Matematicamente, se não tem funcionário insatisfeito, temos 100%
+              de satisfação", explicou o CHRO em comunicado aos investidores.
+            </p>
+
+            <div
+              class="special-alert"
+              style="
+                background: linear-gradient(135deg, #fff2e8 0%, #fff7f0 100%);
+                border-color: #fa541c;
+              "
+            >
+              <div class="alert-header">
+                <div class="alert-icon">💡</div>
+                <h4 class="alert-title">LÓGICA IMBATÍVEL DA GESTÃO</h4>
+              </div>
+              <div class="impact-list" style="border-left-color: #fa541c">
+                <ol>
+                  <li>Realizar pesquisa de satisfação (custo: R$ 50 mil)</li>
+                  <li>Identificar funcionários insatisfeitos (92% do total)</li>
+                  <li>Demitir todos os insatisfeitos (custo: R$ 2 milhões)</li>
+                  <li>Contratar novos funcionários (custo: R$ 500 mil)</li>
+                  <li>Nova pesquisa mostrará 100% de satisfação</li>
+                </ol>
+              </div>
+              <p
+                class="news-text"
+                style="
+                  margin-top: 10px;
+                  font-weight: bold;
+                  color: #fa541c;
+                  font-size: 14px;
+                "
+              >
+                RESULTADO: Empresa agora tem 8 funcionários super satisfeitos (e
+                92 vagas abertas no LinkedIn).
+              </p>
+            </div>
+
+            <div class="fake-quote">
+              "É pura matemática corporativa. Em vez de melhorar as condições de
+              trabalho, melhoramos as condições da planilha de Excel. Os
+              gráficos ficaram lindos!"
+              <span class="quote-author"
+                >— Head de People da TechNonsense (último dia no cargo)</span
+              >
+            </div>
+          </article>
+
+          <!-- MATÉRIA 5: BANCO MASTER vs WILL BANK -->
+          <article class="news-item">
+            <h3 class="section-title">FINANÇAS & BRIGA FANCY</h3>
+            <h4 class="news-title">
+              Banco Master Processa Will Bank Por Uso Excessivo de Emojis em
+              Comunicação Corporativa
+            </h4>
+            <p class="news-text">
+              Em ação judicial inédita, o Banco Master alega que o Will Bank
+              está causando "poluição visual corporativa" com seu uso desmedido
+              de emojis. "Eles colocam 🚀 em todo comunicado de resultados. Isso
+              desvaloriza o significado do foguete para quem realmente cresce",
+              afirma a petição.
+            </p>
+
+            <div class="stats-container">
+              <div class="stat-box">
+                <span class="stat-number" style="color: #13c2c2">47 🚀</span>
+                <span class="stat-label">Por relatório trimestral</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-number" style="color: #13c2c2">R$ 10 mi</span>
+                <span class="stat-label">Indenização pedida</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-number" style="color: #13c2c2">∞ 🔥</span>
+                <span class="stat-label">Uso do "fogo"</span>
+              </div>
+            </div>
+
+            <div class="fake-quote">
+              "Quando você banaliza o 🚀, não tem como comunicar crescimento
+              real. Eles usam até para queda no lucro! Isso é crime contra a
+              semiótica financeira."
+              <span class="quote-author"
+                >— Diretor de Comunicação do Banco Master (que assina emails com
+                "Cordialmente, 🤵")</span
+              >
+            </div>
+
+            <p class="news-text">
+              O caso deve ser julgado por tribunal de arbitragem do Instagram. A
+              pena pode incluir proibição de usar 😉 em comunicados de demissão
+              em massa.
+            </p>
+          </article>
+
+          <!-- CLASSIFICADOS NOVOS -->
+          <article class="news-item">
+            <h3 class="section-title">CLASSIFICADOS ABSURDOS</h3>
+            <div class="classified">
+              <p>
+                <strong>VENDE-SE:</strong> Diploma de "Especialista em Agile"
+                nunca usado. Inclui certificado de Scrum Master e 3 postagens
+                prontas para LinkedIn sobre "transformação digital". Preço: R$
+                500 ou troca por vale-presente.
+              </p>
+
+              <p>
+                <strong>ALUGA-SE:</strong> Ex-Google que sabe falar "na minha
+                época no Vale..." em reuniões. Cobro por menção à cultura do
+                free food. Pacote premium inclui história inventada sobre
+                conhecer o Larry Page.
+              </p>
+
+              <p>
+                <strong>OFEREÇO:</strong> Aulas de como fingir que entendeu
+                gráfico em reunião. Técnicas: "Hmm, interessante!", "Podemos dar
+                uma circulada nisso?" e o clássico "Vamos levar offline".
+              </p>
+
+              <p>
+                <strong>PROCURA-SE:</strong> Estagiário com 5 anos de
+                experiência em Python, Java e neurociência computacional.
+                Salário: R$ 1.500 + "oportunidade de crescimento". Exigimos
+                paixão e disponibilidade 24/7.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- RODAPÉ PRINCIPAL -->
+      <footer class="newspaper-footer">
+        <hr class="divider-thin" />
+        <div class="disclaimer">
+          ⚠️ <strong>AVISO LEGAL (OU NÃO):</strong> Este jornal é uma obra de
+          ficção satírica. Todas as notícias são inventadas para fins de
+          entretenimento e crítica social leve. Se você se identificou com
+          alguma matéria, considere terapia. Se for o chefe, considere ser menos
+          identificável.
+        </div>
+        <div class="meme-tag">
+          #PasquimCorporativo | #HumorQueDóiDeVerdade | #SextouNoLinkedIn |
+          #FakeNewsDeQualidade
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const today = new Date();
+        const dateElements = document.querySelectorAll(".date-line");
+
+        // MODIFICAÇÃO: Para teste, use data fixa
+        // Em 2026, mude TEST_MODE para false
+        const TEST_MODE = true;
+
+        if (TEST_MODE) {
+          // MODO TESTE: Mostra data fictícia para preview
+          dateElements.forEach((el) => {
+            el.textContent =
+              "SEXTA-FEIRA, 6 DE FEVEREIRO DE 2026 • broilo.github.io/pasquim-corporativo/";
+          });
+
+          const editionElement = document.querySelector(".edition-number");
+          if (editionElement) {
+            editionElement.textContent = "EDIÇÃO #002";
+          }
+
+          console.log("🔧 MODO TESTE ATIVADO");
+          console.log("Para produção em 2026: Mude TEST_MODE para false");
+        } else {
+          // MODO PRODUÇÃO (use a partir de 30/01/2026)
+
+          // Atualiza data real
+          dateElements.forEach((el) => {
+            const originalText = "6 DE FEVEREIRO DE 2026";
+            const newDate = today
+              .toLocaleDateString("pt-BR", {
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })
+              .toUpperCase();
+
+            if (el.textContent.includes(originalText)) {
+              el.textContent = el.textContent.replace(originalText, newDate);
+            }
+          });
+
+          // Cálculo real da edição - SEU CÓDIGO AQUI!
+          const startDate = new Date("2026-01-30");
+          const diffTime = Math.abs(today - startDate);
+          const diffWeeks = Math.ceil(diffTime / (1000 * 60 * 60 * 24 * 7));
+
+          const editionElement = document.querySelector(".edition-number");
+          if (editionElement) {
+            editionElement.textContent = `EDIÇÃO #${diffWeeks.toString().padStart(3, "0")}`;
+          }
+        }
+
+        // Efeito interativo na notícia pequena
+        const smallNews = document.querySelector(".small-news");
+        if (smallNews) {
+          smallNews.addEventListener("click", function () {
+            this.style.transform = "scale(1.01)";
+            this.style.boxShadow = "0 4px 8px rgba(0,0,0,0.1)";
+            setTimeout(() => {
+              this.style.transform = "scale(1)";
+              this.style.boxShadow = "0 2px 4px rgba(0,0,0,0.05)";
+            }, 200);
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

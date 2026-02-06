@@ -3,78 +3,130 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Arquivo - O Pasquim Corporativo</title>
+    <title>Arquivo Completo - O Pasquim Corporativo</title>
     <style>
-      /* ESTILOS DO ARQUIVO */
-      .arquivo-layout {
-        width: 900px;
-        margin: 0 auto;
+      /* ESTILOS SIMILARES AO JORNAL */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
         font-family: "Times New Roman", Times, serif;
+        background-color: #fff;
+        color: #222;
+        line-height: 1.4;
         padding: 20px;
       }
 
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      /* CABEÇALHO DO ARQUIVO */
       .arquivo-header {
         text-align: center;
-        margin-bottom: 30px;
+        margin-bottom: 40px;
+        padding-bottom: 20px;
         border-bottom: 3px double #333;
-        padding-bottom: 15px;
       }
 
       .arquivo-title {
-        font-family: "Libre Baskerville", Georgia, serif;
+        font-family: Georgia, serif;
         font-size: 48px;
-        font-weight: 900;
-        margin: 20px 0;
+        font-weight: bold;
+        margin: 20px 0 10px;
+        color: #1a1a1a;
       }
 
-      .edicoes-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 20px;
+      .arquivo-subtitle {
+        font-size: 18px;
+        color: #666;
+        font-style: italic;
+      }
+
+      /* CONTADOR */
+      .stats {
+        background: #f9f9f9;
+        padding: 15px;
+        border-radius: 5px;
+        margin: 20px 0;
+        text-align: center;
+        font-size: 14px;
+        color: #666;
+        border-left: 4px solid #b30000;
+      }
+
+      /* LISTA DE EDIÇÕES */
+      .edicoes-lista {
         margin: 30px 0;
       }
 
-      .edicao-card {
-        background: #f9f9f9;
+      .edicao-item {
+        background: white;
         border: 1px solid #ddd;
-        border-radius: 8px;
+        border-radius: 5px;
         padding: 20px;
-        transition: transform 0.3s;
-        cursor: pointer;
+        margin-bottom: 15px;
+        transition: all 0.3s ease;
+        position: relative;
       }
 
-      .edicao-card:hover {
-        transform: translateY(-5px);
+      .edicao-item:hover {
+        transform: translateX(5px);
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        background: #fff;
+        border-left: 5px solid #b30000;
+      }
+
+      .edicao-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
       }
 
       .edicao-numero {
-        font-size: 14px;
-        color: #b30000;
+        font-size: 24px;
         font-weight: bold;
-        margin-bottom: 5px;
+        color: #b30000;
       }
 
       .edicao-data {
-        font-size: 12px;
+        font-size: 14px;
         color: #666;
-        margin-bottom: 10px;
+        background: #f0f0f0;
+        padding: 3px 8px;
+        border-radius: 3px;
       }
 
       .edicao-titulo {
         font-family: Georgia, serif;
-        font-size: 18px;
+        font-size: 22px;
         font-weight: bold;
         margin: 10px 0;
-        line-height: 1.3;
+        color: #1a1a1a;
       }
 
-      .edicao-manchete {
-        font-size: 14px;
-        color: #333;
-        line-height: 1.4;
+      .edicao-resumo {
+        font-size: 16px;
+        color: #444;
         margin-bottom: 15px;
+        line-height: 1.5;
+      }
+
+      .edicao-destaques {
+        background: #fff9e6;
+        padding: 10px;
+        border-radius: 3px;
+        margin: 10px 0;
+        border-left: 3px solid #ffb300;
+        font-size: 14px;
+      }
+
+      .edicao-destaques strong {
+        color: #d48806;
       }
 
       .btn-ler {
@@ -83,98 +135,265 @@
         color: white;
         padding: 8px 15px;
         text-decoration: none;
-        border-radius: 4px;
-        font-size: 14px;
+        border-radius: 3px;
+        font-weight: bold;
         transition: background 0.3s;
+        margin-top: 10px;
       }
 
       .btn-ler:hover {
         background: #990000;
       }
 
-      .voltar-home {
-        display: block;
-        text-align: center;
+      /* NAVEGAÇÃO */
+      .navegacao {
+        display: flex;
+        justify-content: space-between;
         margin: 40px 0;
-        color: #666;
-        text-decoration: none;
+        padding: 20px 0;
+        border-top: 1px solid #ddd;
       }
 
-      .voltar-home:hover {
+      .nav-link {
+        text-decoration: none;
         color: #b30000;
+        font-weight: bold;
+        font-size: 16px;
+      }
+
+      .nav-link:hover {
+        text-decoration: underline;
+      }
+
+      /* RODAPÉ */
+      .footer {
+        text-align: center;
+        margin-top: 50px;
+        padding-top: 20px;
+        border-top: 1px solid #ddd;
+        font-size: 12px;
+        color: #666;
+      }
+
+      /* BOTÃO VOLTAR AO TOPO */
+      .back-to-top {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #b30000;
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 40px;
+        text-decoration: none;
+        font-size: 20px;
+        display: none;
+      }
+
+      .back-to-top.visible {
+        display: block;
+      }
+
+      /* RESPONSIVO */
+      @media (max-width: 768px) {
+        .container {
+          padding: 10px;
+        }
+
+        .arquivo-title {
+          font-size: 36px;
+        }
+
+        .edicao-header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .edicao-data {
+          margin-top: 5px;
+        }
       }
     </style>
   </head>
   <body>
-    <div class="arquivo-layout">
+    <a href="#" class="back-to-top" id="backToTop">↑</a>
+
+    <div class="container">
+      <!-- CABEÇALHO -->
       <header class="arquivo-header">
         <h1 class="arquivo-title">📚 ARQUIVO COMPLETO</h1>
-        <p>Todas as edições d'O Pasquim Corporativo em um só lugar</p>
-        <p><small>Clique em qualquer edição para ler na íntegra</small></p>
+        <p class="arquivo-subtitle">Todas as edições d'O Pasquim Corporativo</p>
       </header>
 
-      <div class="edicoes-grid" id="edicoesContainer">
-        <!-- As edições serão carregadas aqui pelo JavaScript -->
-        <div class="loading">Carregando edições...</div>
+      <!-- CONTADOR -->
+      <div class="stats">
+        <span id="contador">Carregando...</span> edições disponíveis •
+        Atualizado em <span id="dataAtualizacao"></span>
       </div>
 
-      <a href="index.html" class="voltar-home">← Voltar para a edição atual</a>
+      <!-- LISTA DE EDIÇÕES -->
+      <div class="edicoes-lista" id="edicoesLista">
+        <!-- As edições serão carregadas aqui automaticamente -->
+        <p style="text-align: center; padding: 40px">Carregando edições...</p>
+      </div>
 
-      <footer
-        style="
-          text-align: center;
-          margin-top: 50px;
-          font-size: 12px;
-          color: #666;
-        "
-      >
+      <!-- NAVEGAÇÃO -->
+      <div class="navegacao">
+        <a href="index.html" class="nav-link">← Voltar para a edição atual</a>
+        <a href="#top" class="nav-link">↑ Topo</a>
+      </div>
+
+      <!-- RODAPÉ -->
+      <footer class="footer">
         <p>
-          O Pasquim Corporativo • Todas as sextas-feiras • Humor que dói de
-          verdade
+          O Pasquim Corporativo • Humor que dói de verdade • Toda sexta-feira
+        </p>
+        <p>
+          © 2026 • Todas as notícias são fictícias para fins de entretenimento
         </p>
       </footer>
     </div>
 
     <script>
-      // BANCO DE DADOS DAS EDIÇÕES
+      // DADOS DAS EDIÇÕES - VOCÊ VAI ATUALIZAR ESTA LISTA SEMANALMENTE
       const edicoes = [
         {
           numero: "001",
-          data: "30/01/2026",
-          titulo: "CEO Substitui Reuniões por Telepatia",
-          manchete:
-            "Líder diz que 'silêncio é a nova agenda' enquanto colaboradores ouvem apenas pensamentos de autossabotagem.",
-          arquivo: "edicoes/20260130_ed001.html",
-          destaque: "Pesquisa revela 120% de aumento em 'sensação de sinergia'",
+          data: "30 de Janeiro de 2026",
+          titulo: "CEO SUBSTITUI REUNIÕES POR SESSÕES DE TELEPATIA COLETIVA",
+          resumo:
+            "Líder diz que 'o silêncio é a nova agenda' enquanto colaboradores relatam ouvir apenas seus próprios pensamentos de autossabotagem.",
+          destaques: [
+            "120% de aumento em 'sensação de sinergia'",
+            "0% de aumento em produtividade real",
+            "Investidores consideram meditação obrigatória",
+          ],
+          arquivo: "edicoes/20260130_ed001.html", // Primeira edição está na página inicial
         },
-        // Adicione novas edições aqui
+        {
+          numero: "002",
+          data: "6 de Fevereiro de 2026",
+          titulo:
+            "Consultoria Cobra R$ 500 mil por Estudo que Conclui: 'É Preciso Trabalhar Para Ganhar Dinheiro'",
+          resumo:
+            "A McKinsey & Co. divulgou relatório de 300 páginas que, após a análise de dados provenientes de cerca de 15 milhões de fontes não estruturadas, chegou à conclusão revolucionária: organizações produtivas têm mais receita. Clientes afirmam que 'o valor está na coragem de dizer o óbvio com gráficos caros'.",
+          destaques: [
+            "Será usado por 97% dos clientes",
+            "Mas apenas como doorstop digital",
+            "Consultores envolvidos já foram promovidos",
+          ],
+          arquivo: "index.html", // Primeira edição está na página inicial
+        },
+        // ADICIONE NOVAS EDIÇÕES AQUI ACIMA DESTA LINHA
+        // Copie o formato e incremente o número
       ];
 
-      // FUNÇÃO PARA RENDERIZAR EDIÇÕES
+      // FUNÇÃO PARA RENDERIZAR TODAS AS EDIÇÕES
       function renderizarEdicoes() {
-        const container = document.getElementById("edicoesContainer");
+        const container = document.getElementById("edicoesLista");
+        const contador = document.getElementById("contador");
+        const dataAtualizacao = document.getElementById("dataAtualizacao");
+
+        // Atualiza contador
+        contador.textContent = edicoes.length;
+        dataAtualizacao.textContent = new Date().toLocaleDateString("pt-BR");
+
+        // Limpa container
         container.innerHTML = "";
 
-        // Ordena do mais recente para o mais antigo
-        edicoes
-          .sort((a, b) => b.numero - a.numero)
-          .forEach((edicao) => {
-            const card = document.createElement("div");
-            card.className = "edicao-card";
-            card.innerHTML = `
-                    <div class="edicao-numero">EDIÇÃO #${edicao.numero.padStart(3, "0")}</div>
-                    <div class="edicao-data">${edicao.data}</div>
+        // Ordena do MAIS RECENTE para o MAIS ANTIGO
+        const edicoesOrdenadas = [...edicoes].sort(
+          (a, b) => b.numero - a.numero,
+        );
+
+        // Cria HTML para cada edição
+        edicoesOrdenadas.forEach((edicao) => {
+          const edicaoElement = document.createElement("div");
+          edicaoElement.className = "edicao-item";
+          edicaoElement.id = `edicao-${edicao.numero.toString().padStart(3, "0")}`;
+
+          // Formata número com 3 dígitos
+          const numeroFormatado = edicao.numero.toString().padStart(3, "0");
+
+          edicaoElement.innerHTML = `
+                    <div class="edicao-header">
+                        <div class="edicao-numero">EDIÇÃO #${numeroFormatado}</div>
+                        <div class="edicao-data">${edicao.data}</div>
+                    </div>
+                    
                     <h3 class="edicao-titulo">${edicao.titulo}</h3>
-                    <p class="edicao-manchete">${edicao.manchete}</p>
-                    <p><small><strong>Destaque:</strong> ${edicao.destaque}</small></p>
+                    
+                    <p class="edicao-resumo">${edicao.resumo}</p>
+                    
+                    <div class="edicao-destaques">
+                        <strong>Destaques:</strong> ${edicao.destaques.join(" • ")}
+                    </div>
+                    
                     <a href="${edicao.arquivo}" class="btn-ler">Ler edição completa →</a>
                 `;
-            container.appendChild(card);
-          });
+
+          container.appendChild(edicaoElement);
+        });
       }
 
-      // CARREGAR AO ABRIR A PÁGINA
-      document.addEventListener("DOMContentLoaded", renderizarEdicoes);
+      // FUNÇÃO PARA BOTÃO VOLTAR AO TOPO
+      function setupBackToTop() {
+        const backToTopBtn = document.getElementById("backToTop");
+
+        window.addEventListener("scroll", () => {
+          if (window.scrollY > 300) {
+            backToTopBtn.classList.add("visible");
+          } else {
+            backToTopBtn.classList.remove("visible");
+          }
+        });
+
+        backToTopBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+      }
+
+      // INICIALIZA TUDO QUANDO A PÁGINA CARREGAR
+      document.addEventListener("DOMContentLoaded", () => {
+        renderizarEdicoes();
+        setupBackToTop();
+
+        // Adiciona data de atualização no título da página
+        document.title = `Arquivo (${edicoes.length} edições) - O Pasquim Corporativo`;
+      });
+
+      // FUNÇÃO PARA ADICIONAR NOVA EDIÇÃO (VOCÊ USA ESTA)
+      function adicionarNovaEdicao(dadosNovaEdicao) {
+        /*
+            COMO USAR ESTA FUNÇÃO:
+            
+            1. Toda sexta, após criar a nova edição, chame:
+            
+            adicionarNovaEdicao({
+                numero: 4,  // Próximo número
+                data: "20 de Fevereiro de 2026",
+                titulo: "SEU NOVO TÍTULO AQUI",
+                resumo: "Seu resumo aqui",
+                destaques: ["Destaque 1", "Destaque 2", "Destaque 3"],
+                arquivo: "edicoes/edicao-004.html"  // Caminho do arquivo
+            });
+            
+            2. Depois, salve o arquivo e publique no GitHub
+            */
+
+        // Adiciona à lista
+        edicoes.push(dadosNovaEdicao);
+
+        // Re-renderiza
+        renderizarEdicoes();
+
+        console.log(
+          `✅ Edição #${dadosNovaEdicao.numero.toString().padStart(3, "0")} adicionada ao arquivo!`,
+        );
+      }
     </script>
   </body>
 </html>
