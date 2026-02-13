@@ -12,6 +12,7 @@ Publicado toda sexta-feira no LinkedIn.
 
 - Edição #001: 30/01/2026 - Lançamento
 - Edição #002: 06/02/2026 - Edição semanal
+- Edição #003: 13/02/2026 - Edição semanal
 - [Ver online](https://broilo.github.io/pasquim-corporativo/)
 
 ## 🔗 Links
