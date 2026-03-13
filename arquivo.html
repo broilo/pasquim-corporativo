@@ -374,9 +374,9 @@
         // Limpa container
         container.innerHTML = "";
 
-        // Ordena do MAIS RECENTE para o MAIS ANTIGO
+        // Ordena do MAIS RECENTE para o MAIS ANTIGO (CORRIGIDO)
         const edicoesOrdenadas = [...edicoes].sort(
-          (a, b) => b.numero - a.numero,
+          (a, b) => parseInt(b.numero) - parseInt(a.numero)
         );
 
         // Cria HTML para cada edição
