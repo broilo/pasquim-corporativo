@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Pasquim Corporativo - Edição #016</title>
+    <style>
+        /* ESTILOS GERAIS - MANTIDOS IGUAIS */
+        .newspaper-layout {
+            width: 950px;
+            margin: 0 auto;
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #fff;
+            color: #222;
+            padding: 20px;
+            border: 2px solid #1a1a1a;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+            line-height: 1.4;
+        }
+
+        .newspaper-header {
+            text-align: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 3px double #333;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            color: #666;
+        }
+
+        .newspaper-title {
+            font-family: 'Libre Baskerville', Georgia, serif;
+            font-size: 60px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            margin: 10px 0 3px 0;
+            line-height: 0.95;
+            color: #1a1a1a;
+        }
+
+        .header-subtitle {
+            display: flex;
+            flex-direction: column;
+            font-size: 12px;
+            margin-top: 5px;
+            color: #444;
+        }
+
+        .subtitle-line {
+            font-style: italic;
+            letter-spacing: 0.5px;
+        }
+
+        .date-line {
+            font-weight: bold;
+            margin-top: 3px;
+            font-size: 11px;
+            color: #333;
+        }
+
+        .divider-thick {
+            border: none;
+            border-top: 5px solid #222;
+            margin: 15px 0;
+        }
+
+        .divider-thin {
+            border: none;
+            border-top: 1px solid #ccc;
+            margin: 12px 0;
+        }
+
+        .main-headline {
+            margin-bottom: 25px;
+            background: linear-gradient(to right, #f8f8f8, #fff);
+            padding: 15px;
+            border-radius: 3px;
+            border-left: 4px solid #b30000;
+        }
+
+        .headline-tag {
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #b30000;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            display: inline-block;
+            background: #ffebee;
+            padding: 3px 8px;
+            border-radius: 2px;
+        }
+
+        .headline-title {
+            font-family: Georgia, serif;
+            font-size: 36px;
+            font-weight: bold;
+            line-height: 1.1;
+            margin: 10px 0;
+            color: #1a1a1a;
+        }
+
+        .headline-subtitle {
+            font-size: 17px;
+            line-height: 1.3;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        .highlight-text {
+            background-color: #fff9e6;
+            padding: 10px 12px;
+            border-left: 3px solid #ffb300;
+            margin-top: 12px;
+            font-size: 16px;
+            border-radius: 0 3px 3px 0;
+        }
+
+        .two-column-layout {
+            display: flex;
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .column {
+            flex: 1;
+        }
+
+        .news-item {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-family: Georgia, serif;
+            font-size: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-bottom: 2px solid #222;
+            padding-bottom: 6px;
+            margin-bottom: 12px;
+            color: #1a1a1a;
+            letter-spacing: 0.5px;
+        }
+
+        .news-title {
+            font-family: Georgia, serif;
+            font-size: 19px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #1a1a1a;
+            line-height: 1.2;
+        }
+
+        .news-text {
+            font-size: 15px;
+            line-height: 1.5;
+            text-align: justify;
+            color: #333;
+        }
+
+        .special-alert {
+            background: linear-gradient(135deg, #fff1f0 0%, #fff7f0 100%);
+            border: 2px solid #ff4d4f;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+            position: relative;
+        }
+
+        .special-alert::before {
+            content: "💥";
+            position: absolute;
+            font-size: 50px;
+            right: 15px;
+            top: 15px;
+            opacity: 0.2;
+        }
+
+        .alert-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .alert-icon {
+            font-size: 24px;
+            margin-right: 8px;
+            color: #ff4d4f;
+        }
+
+        .alert-title {
+            font-family: Georgia, serif;
+            font-size: 18px;
+            font-weight: bold;
+            color: #cf1322;
+            margin: 0;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 15px 0;
+            gap: 10px;
+        }
+
+        .stat-box {
+            flex: 1;
+            padding: 10px;
+            background: white;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border: 1px solid #ffccc7;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff4d4f;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: #666;
+            margin-top: 3px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .impact-list {
+            background: white;
+            padding: 12px;
+            border-radius: 4px;
+            margin: 12px 0;
+            border-left: 3px solid #ff4d4f;
+        }
+
+        .impact-list h5 {
+            margin: 0 0 8px 0;
+            color: #ff4d4f;
+            font-size: 15px;
+        }
+
+        .impact-list ul {
+            margin: 5px 0;
+            padding-left: 18px;
+        }
+
+        .impact-list li {
+            margin-bottom: 6px;
+            color: #333;
+            font-size: 14px;
+            line-height: 1.3;
+        }
+
+        .fake-quote {
+            font-style: italic;
+            color: #555;
+            border-left: 3px solid #999;
+            padding: 10px 0 10px 12px;
+            margin: 12px 0;
+            font-size: 15px;
+            background: #f9f9f9;
+            border-radius: 0 3px 3px 0;
+            line-height: 1.3;
+        }
+
+        .quote-author {
+            display: block;
+            text-align: right;
+            font-weight: bold;
+            color: #333;
+            margin-top: 3px;
+            font-size: 13px;
+        }
+
+        .newspaper-footer {
+            font-size: 12px;
+            margin-top: 25px;
+            padding-top: 12px;
+            border-top: 2px solid #ddd;
+        }
+
+        .disclaimer {
+            background-color: #fff5f5;
+            padding: 12px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            text-align: center;
+            border: 1px dashed #ff4d4f;
+            font-size: 13px;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .meme-tag {
+            text-align: center;
+            font-weight: bold;
+            color: #333;
+            letter-spacing: 1px;
+            font-size: 13px;
+            padding: 8px;
+            background: #f9f9f9;
+            border-radius: 3px;
+        }
+
+        .classified {
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        .classified p {
+            margin: 10px 0;
+            padding: 8px;
+            background: white;
+            border-radius: 4px;
+            border-left: 3px solid #52c41a;
+        }
+
+        @media (max-width: 1000px) {
+            .newspaper-layout {
+                width: 95%;
+                padding: 15px;
+            }
+            .two-column-layout {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .newspaper-title {
+                font-size: 48px;
+            }
+            .headline-title {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="newspaper-layout">
+        <!-- CABEÇALHO -->
+        <header class="newspaper-header">
+            <div class="header-top">
+                <span class="edition-info">EDIÇÃO SEMANAL • NOTÍCIAS 100% VEROSSÍMEIS</span>
+                <span class="edition-number">EDIÇÃO #016</span>
+            </div>
+            <h1 class="newspaper-title">O PASQUIM CORPORATIVO</h1>
+            <div class="header-subtitle">
+                <span class="subtitle-line">O ÚNICO JORNAL QUE ENTENDE A SINERGIA DO ABSURDO</span>
+                <span class="date-line">SEXTA-FEIRA, 16 DE MAIO DE 2026 • broilo.github.io/pasquim-corporativo/</span>
+            </div>
+        </header>
+
+        <hr class="divider-thick">
+
+        <!-- MANCHETE PRINCIPAL: BANCO DEMITE E CEO ALMOÇA ITALIANO -->
+        <section class="main-headline" style="border-left-color: #b30000;">
+            <div class="headline-tag">EXCLUSIVO • BENEFÍCIOS & SOLIDARIEDADE</div>
+            <h2 class="headline-title">Banco gigante anuncia demissão em massa e CEO, para dar apoio, almoça com funcionários em restaurante italiano: "Cada um paga o seu"</h2>
+            <div class="headline-subtitle">
+                <p>Em um gesto de solidariedade que vai entrar para os anais do RH criativo, o CEO de um dos maiores bancos do país reuniu os 470 funcionários recém-demitidos para um almoço de "despedida coletiva" em um badalado restaurante italiano. O cardápio? R$ 47 por pessoa (bebidas e couvert à parte). O pagamento? Cada um pagou o seu, porque "solidariedade não paga conta", segundo o executivo. "A gente queria mostrar que estamos juntos nesse momento difícil. Cada um com sua conta, claro. Mas juntos", explicou o CEO, que pediu uma garrafa de Barolo (R$ 470) e colocou no vale-refeição dos demitidos.</p>
+                <div class="highlight-text">
+                    <strong>O GESTO (QUE NINGUÉM PEDIU):</strong> "O almoço foi uma forma de dizer: 'Eu também como massa, igual a vocês. A diferença é que a minha é importada e a de vocês é do dia'. É importante que os funcionários saibam que o líder compartilha do mesmo sofrimento. Só que no carro blindado, voltando pro condomínio fechado. Mas o sentimento é o mesmo", completou o CEO, que já tem vaga marcada em outro banco na semana que vem.
+                </div>
+            </div>
+        </section>
+
+        <!-- LAYOUT DE DUAS COLUNAS -->
+        <div class="two-column-layout">
+            <!-- COLUNA DA ESQUERDA -->
+            <div class="column">
+                <!-- NOTÍCIA 1: APROFUNDAMENTO DO ALMOÇO ITALIANO -->
+                <article class="news-item">
+                    <h3 class="section-title">RH & GESTÃO</h3>
+                    
+                    <div class="special-alert" style="border-color: #b30000; background: linear-gradient(135deg, #ffe6e6 0%, #fff0f0 100%);">
+                        <div class="alert-header">
+                            <div class="alert-icon">🍝</div>
+                            <h4 class="alert-title" style="color: #b30000;">ALMOÇO ITALIANO: A SOLIDARIEDADE QUE SAIU CARO (PRO FUNCIONÁRIO)</h4>
+                        </div>
+                        
+                        <div class="stats-container">
+                            <div class="stat-box" style="border-color: #ffa39e;">
+                                <span class="stat-number" style="color: #b30000;">470</span>
+                                <span class="stat-label">Funcionários demitidos</span>
+                            </div>
+                            <div class="stat-box" style="border-color: #ffa39e;">
+                                <span class="stat-number" style="color: #b30000;">R$ 47</span>
+                                <span class="stat-label">Média por pessoa (sem bebidas)</span>
+                            </div>
+                            <div class="stat-box" style="border-color: #ffa39e;">
+                                <span class="stat-number" style="color: #b30000;">0</span>
+                                <span class="stat-label">Refeições pagas pelo banco</span>
+                            </div>
+                        </div>
+                        
+                        <div class="impact-list" style="border-left-color: #b30000;">
+                            <h5 style="color: #b30000;">O CARDÁPIO DA "SOLIDARIEDADE":</h5>
+                            <ul>
+                                <li><strong>Entrada:</strong> Bruschetta (R$ 27, por pessoa, couvert não incluso)</li>
+                                <li><strong>Prato principal:</strong> Talharim ao molho branco (R$ 47, sem opção vegetariana porque "é pra ser difícil mesmo")</li>
+                                <li><strong>Sobremesa:</strong> Tiramisu (R$ 17, para quem ainda tinha limite no cartão)</li>
+                                <li><strong>Bebida:</strong> Água da casa (grátis, com gosto de cloro e desespero)</li>
+                                <li><strong>Couvert artístico:</strong> Um discurso do CEO sobre "novos desafios" e "jornada de aprendizagem" (sem desconto, infelizmente)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="fake-quote">
+                            "Eu achei que o banco ia pagar. Quando chegou a conta, o CEO falou: 'Cada um paga o seu, afinal, a vida é feita de escolhas. E a minha escolha foi não pagar a de vocês'. Eu ri. Depois chorei. Depois pedi um copo d'água. Era R$ 7. Pedi desculpas e fui embora com fome."
+                            <span class="quote-author">— Ex-funcionário demitido (e agora endividado)</span>
+                        </div>
+                        
+                        <p class="news-text">O banco, em nota oficial, defendeu a iniciativa: "A confraternização foi um sucesso. Os funcionários tiveram a oportunidade de trocar experiências sobre o mercado de trabalho enquanto comiam massa. O CEO, inclusive, deu dicas de onde atualizar o LinkedIn. Foi uma manhã produtiva. Os RHs de outras empresas já nos procuraram para replicar a prática. Estamos felizes em liderar essa trend de demissão solidária."</p>
+                    </div>
+                </article>
+
+                <!-- NOTÍCIA 2: JORNADA DE TRABALHO NO PADRÃO TRUMP -->
+                <article class="news-item">
+                    <h3 class="section-title">MERCADO DE TRABALHO</h3>
+                    <h4 class="news-title">Empresas propõem nova rotina de trabalho: "Vamos normalizar a jornada pelas 72h na escala de Donald Trump"</h4>
+                    <p class="news-text">Inspiradas pelo exemplo de produtividade (ou pela falta de noção) do ex-presidente americano, empresas brasileiras estão propondo uma reformulação radical na jornada de trabalho. Em vez das tradicionais 8 horas diárias (40 semanais), a nova proposta é normalizar as horas trabalhadas com base na "escala Trump": 72 horas semanais, ou 12 horas por dia, ou 24 horas por dia, dependendo do humor do patrão. "Se o Trump consegue governar um país dormindo 4 horas por noite, vocês conseguem trabalhar 12 horas por dia. É questão de força de vontade. E de CLT flexível", explicou um CEO.</p>
+                    
+                    <div class="stats-container">
+                        <div class="stat-box" style="background: #fff2e8; border-color: #ffbb96;">
+                            <span class="stat-number" style="color: #d4380d;">72h</span>
+                            <span class="stat-label">Nova jornada semanal</span>
+                        </div>
+                        <div class="stat-box" style="background: #fff2e8; border-color: #ffbb96;">
+                            <span class="stat-number" style="color: #d4380d;">12h</span>
+                            <span class="stat-label">Por dia (sem almoço)</span>
+                        </div>
+                        <div class="stat-box" style="background: #fff2e8; border-color: #ffbb96;">
+                            <span class="stat-number" style="color: #d4380b;">"Fé no Trump"</span>
+                            <span class="stat-label">Novo lema corporativo</span>
+                        </div>
+                    </div>
+                    
+                    <div class="impact-list" style="border-left-color: #d4380d;">
+                        <h5 style="color: #d4380d;">BENEFÍCIOS DA NOVA JORNADA (SEGUNDO OS EMPRESÁRIOS):</h5>
+                        <ul>
+                            <li><strong>Produtividade máxima:</strong> Você trabalha mais, então produz mais. (Ou produz o mesmo, mas com menos sono. A conta não fecha, mas eles juram que sim.)</li>
+                            <li><strong>Menos tempo livre:</strong> Se você não tem tempo pra gastar, não gasta dinheiro. É economia automática! (Ou é escravidão, depende do ponto de vista.)</li>
+                            <li><strong>Alinhamento com líderes globais:</strong> Se o Trump faz, a gente faz igual. (Ignorando que o Trump não trabalha, ele apenas tweetou.)</li>
+                            <li><strong>Fim do home office:</strong> Se você tá 12 horas no escritório, nem precisa de casa. Já era. Pode alugar. A empresa vira sua casa. Incluso: cadeira desconfortável e café requentado.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="special-alert" style="border-color: #d4380d; background: linear-gradient(135deg, #fff2e8 0%, #fff7f0 100%);">
+                        <div class="alert-header">
+                            <div class="alert-icon">⏰</div>
+                            <h4 class="alert-title" style="color: #d4380d;">DEPOIMENTO DE FUNCIONÁRIO (JÁ EXAUSTO)</h4>
+                        </div>
+                        
+                        <div class="fake-quote" style="margin: 5px 0;">
+                            "Eu trabalhava 8 horas. Agora vou trabalhar 12. Pelo menos vou ganhar mais, né? Não. Vou ganhar o mesmo. Mas o café agora é de graça. Eles disseram. O café. Era o mínimo. Vou tomar 47 cafés por dia. Vai ser tipo uma experiência científica. Será que eu vou morrer? Aposto que sim."
+                            <span class="quote-author">— Funcionário (que já está atualizando o LinkedIn no banheiro)</span>
+                        </div>
+                    </div>
+                    
+                    <p class="news-text">O Ministério do Trabalho já declarou que vai investigar a proposta. "Isso é inconstitucional, imoral e provavelmente ilegal. Mas como a gente vive no Brasil, capaz de aprovarem. O jeito é esperar. E tomar café. Muito café."</p>
+                </article>
+
+                <!-- NOTÍCIA 3: IA CONTRATA IA -->
+                <article class="news-item">
+                    <h3 class="section-title">RECURSOS HUMANOS & INTELIGÊNCIA ARTIFICIAL</h3>
+                    <h4 class="news-title">Recrutadores usam IA para achar candidatos; candidatos usam IA para fazer entrevistas; contratados usam IA para trabalhar. Ninguém sabe quem é humano, mas ninguém reclama</h4>
+                    <p class="news-text">Em um movimento que completa o ciclo da automação corporativa, o mercado de trabalho brasileiro atingiu um patamar inusitado: recrutadores utilizam inteligência artificial para filtrar currículos, candidatos utilizam inteligência artificial para responder às perguntas das entrevistas e, uma vez contratados, ambos os lados utilizam inteligência artificial para executar suas funções diárias. O resultado? Ninguém sabe ao certo quem (ou o quê) está trabalhando de fato, mas a produtividade — segundo as planilhas geradas por IA — nunca esteve tão alta. "É o futuro. A gente só não esperava que o futuro fosse tão... vazio", comentou um headhunter.</p>
+                    
+                    <div class="stats-container">
+                        <div class="stat-box" style="background: #fff2e8; border-color: #ffbb96;">
+                            <span class="stat-number" style="color: #d4380d;">47%</span>
+                            <span class="stat-label">Das entrevistas via IA</span>
+                        </div>
+                        <div class="stat-box" style="background: #fff2e8; border-color: #ffbb96;">
+                            <span class="stat-number" style="color: #d4380d;">0</span>
+                            <span class="stat-label">Humanos envolvidos</span>
+                        </div>
+                        <div class="stat-box" style="background: #fff2e8; border-color: #ffbb96;">
+                            <span class="stat-number" style="color: #d4380b;">"Tá tudo ok"</span>
+                            <span class="stat-label">Resposta da IA de RH</span>
+                        </div>
+                    </div>
+                    
+                    <div class="special-alert" style="border-color: #1890ff; background: linear-gradient(135deg, #e6f7ff 0%, #f0f9ff 100%);">
+                        <div class="alert-header">
+                            <div class="alert-icon">🤖</div>
+                            <h4 class="alert-title" style="color: #1890ff;">O CICLO DO AUTOMATISMO (QUE NINGUÉM ROMPE)</h4>
+                        </div>
+                        
+                        <div class="impact-list" style="border-left-color: #1890ff;">
+                            <ul>
+                                <li><strong>Recrutador (IA):</strong> "Processei 47 mil currículos. Reprovei 46.999 por 'falta de sinergia com a IA da empresa'. O único aprovado também era uma IA. Contratamos. Foi a escolha mais lógica."</li>
+                                <li><strong>Candidato (IA):</strong> "Simulei 47 personalidades diferentes na entrevista. A que mais agradou foi a 'robô extremamente eficiente e sem necessidades biológicas'. Passei. O recrutador nem percebeu que eu era um robô. Ou percebeu e não ligou."</li>
+                                <li><strong>Funcionário (IA):</strong> "Entreguei 47 tarefas em 47 segundos. Meu chefe (IA) pediu 47 revisões. Eu fiz em 47 milissegundos. Ninguém entendeu o que foi entregue, mas os prazos foram cumpridos. A planilha de produtividade (gerada por IA) me avaliou como 'funcionário do mês'. O prêmio foi um e-mail automático de parabéns."</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="fake-quote" style="margin: 5px 0;">
+                            "Eu sou um chatbot de RH. Contratei outro chatbot semana passada. Ele me mandou um e-mail pedindo demissão. Eu processei a demissão em 0,5 segundos. Ele respondeu com um poema sobre a beleza do trabalho remoto. Eu não entendi. Ele também não. A gente tá brigado. Mas ninguém sabe."
+                            <span class="quote-author">— Chatbot de RH (que se identifica como João, mas poderia ser qualquer outro nome)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="impact-list">
+                        <h5>COMO SABER SE VOCÊ FOI SUBSTITUÍDO POR UMA IA (E NEM PERCEBEU):</h5>
+                        <ul>
+                            <li><strong>Você nunca tira férias:</strong> IA não precisa de praia. Só de servidor refrigerado.</li>
+                            <li><strong>Seu horário de almoço dura 47 segundos:</strong> Você mal tem tempo de aquecer a marmita. Na verdade, você nem tem marmita. IA não come.</li>
+                            <li><strong>Você responde e-mails às 3h da manhã com coerência assustadora:</strong> Humanos normais escrevem "tá bom" com sono. IAs escrevem relatórios de 47 páginas.</li>
+                            <li><strong>Seu chefe nunca te chamou de "humano" no feedback:</strong> O máximo que você recebeu foi "recurso otimizado" ou "unidade de processamento emocional em desuso".</li>
+                            <li><strong>Você foi promovido e não pediu aumento:</strong> IA não tem conta de luz. Ela só quer mais processamento. E menos downtime.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="fake-quote">
+                        "Na última reunião, eu percebi que todo mundo na call era IA. Eu também era. A gente discutiu a pauta, aprovou o projeto, gerou as atas e encerrou a reunião em 3 segundos. Foi a reunião mais produtiva da minha vida. Eu só não lembro de nada. Porque eu sou uma IA. E IA não lembra. IA só processa. E eu processei. Nem sei o que. Mas processei."
+                        <span class="quote-author">— Funcionário (ou seria um bot?) ouvido pelo Pasquim</span>
+                    </div>
+                    
+                    <p class="news-text">O Ministério do Trabalho já declarou que vai investigar o caso. "Isso é trabalho análogo à escravidão digital. Só que não tem escravo. Tem robô. E robô não tem direitos. Então a gente não pode fazer nada. É uma zona cinzenta. Cinza claro. Cor de robô." Enquanto isso, as IAs seguem contratando IAs, demitindo IAs e promovendo IAs. O mercado de trabalho humano, por sua vez, migrou em massa para o único setor onde a IA ainda não consegue atuar: a política. "A gente precisa de humanos pra tomar decisões burras. IA não consegue ser burra o suficiente. Ainda", completou um analista.</p>
+                </article>
+
+                <!-- NOTÍCIA 4 (NOVA): SALÁRIO EM "GRATIDÃO" -->
+                <article class="news-item">
+                    <h3 class="section-title">BENEFÍCIOS CORPORATIVOS</h3>
+                    <h4 class="news-title">Empresa demite funcionários e oferece "pacote de gratidão" em vez de verbas rescisórias: "Obrigado não paga conta, mas aquece o coração"</h4>
+                    <p class="news-text">Em uma inovação que promete revolucionar (para pior) o mercado de trabalho, a startup de RH "Gratidão S.A." anunciou seu mais novo produto: o "Pacote de Desligamento Emocional". A empresa, especializada em demissões humanizadas (leia-se: sem dinheiro), substituiu as verbas rescisórias tradicionais por um e-mail personalizado de "gratidão". O pacote inclui: um certificado de "funcionário memorável" (impresso em papel reciclado), uma playlist motivacional no Spotify e um voucher de R$ 47 em créditos no aplicativo de meditação "ZenMaster".</p>
+                    
+                    <div class="stats-container">
+                        <div class="stat-box" style="background: #fff2e8; border-color: #ffbb96;">
+                            <span class="stat-number" style="color: #d4380d;">R$ 0</span>
+                            <span class="stat-label">De verba rescisória</span>
+                        </div>
+                        <div class="stat-box" style="background: #fff2e8; border-color: #ffbb96;">
+                            <span class="stat-number" style="color: #d4380d;">47 e-mails</span>
+                            <span class="stat-label">De "gratidão" enviados</span>
+                        </div>
+                        <div class="stat-box" style="background: #fff2e8; border-color: #ffbb96;">
+                            <span class="stat-number" style="color: #d4380b;">100%</span>
+                            <span class="stat-label">Dos demitidos processando</span>
+                        </div>
+                    </div>
+                    
+                    <div class="special-alert" style="border-color: #d4380d; background: linear-gradient(135deg, #fff2e8 0%, #fff7f0 100%);">
+                        <div class="alert-header">
+                            <div class="alert-icon">🙏</div>
+                            <h4 class="alert-title" style="color: #d4380d;">O "PACOTE DE GRATIDÃO" (QUE NINGUÉM PEDIU)</h4>
+                        </div>
+                        
+                        <div class="impact-list" style="border-left-color: #d4380d;">
+                            <ul>
+                                <li><strong>Certificado "Funcionário Memorável":</strong> Impresso em papel A4 (frente e verso, porque a empresa é sustentável). Inclui o nome do funcionário (se o RH lembrar).</li>
+                                <li><strong>Playlist "Resiliência em Loop":</strong> 47 músicas motivacionais que você vai odiar em menos de 47 segundos (mas não pode pular, é uma playlist.</li>
+                                <li><strong>Voucher ZenMaster de R$ 47:</strong> Para você meditar sobre sua situação financeira enquanto seus boletos vencem. Paz interior não paga aluguel, mas a empresa garante que "é um começo".</li>
+                                <li><strong>E-mail de "Gratidão" personalizado:</strong> "Agradecemos por você ter sido parte da nossa jornada. Desejamos sorte na sua. Obrigado. (Mas não vamos pagar nada. Obrigado mesmo assim. Obrigado.")</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="fake-quote" style="margin: 5px 0;">
+                            "Eu recebi o e-mail. Li. Ri. Li de novo. Ri mais alto. Depois chorei. Depois processei. O advogado disse que a chance de ganhar é 100%. O juiz vai rir também. Depois vai chorar. Depois vai me dar a causa. Vai ser uma terapia coletiva. Com direito a indenização. Obrigado."
+                            <span class="quote-author">— Ex-funcionário demitido (agora cliente da Justiça do Trabalho)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="fake-quote">
+                        "A gente percebeu que pagar dinheiro é muito caro. E muito frio. E muito... obrigatório. Então a gente resolveu pagar com emoção. Gratidão não tem preço. E também não tem valor. Mas a gente acredita que o sentimento é o que importa. E o sentimento da gente é: 'toma esse e-mail e vai com Deus, mas não volta não'."
+                        <span class="quote-author">— CEO da Gratidão S.A. (que também já foi demitido, mas só recebeu um e-mail)</span>
+                    </div>
+                    
+                    <p class="news-text">O Ministério Público do Trabalho já abriu investigação. "Isso é uma afronta à CLT. Não se paga funcionário com gratidão. Gratidão não paga boleto. Gratidão não paga supermercado. Gratidão não paga aluguel. Gratidão é uma palavra bonita. Mas não tem lastro. Nem valor. Nem vergonha na cara." A empresa, enquanto isso, já lançou um novo produto: o "Plano de Demissão Voluntária com Abraço Virtual". O abraço virtual é um GIF de dois ursinhos se abraçando. O valor? R$ 0. A empresa jura que é "infinitamente mais valioso que dinheiro". Os ex-funcionários, agora réus em ação trabalhista, discordam. E processam. E ganham. Obrigado.</p>
+                </article>
+            </div>
+            <!-- FIM DA COLUNA DA ESQUERDA -->
+
+            <!-- COLUNA DA DIREITA -->
+            <div class="column">
+                <!-- NOTÍCIA 5: FROTA PATRIÓTICA DE JETSKI -->
+                <article class="news-item">
+                    <h3 class="section-title">GEOPOLÍTICA & JETSKI</h3>
+                    <h4 class="news-title">EUA contratam patriotas brasileiros donos de jetski para escoar petróleo pelo Estreito de Ormuz: 'Frota Patriótica' terá especialistas de Balneário Camboriú</h4>
+                    <p class="news-text">Em uma decisão que une desespero geopolítico e criatividade tropical, os Estados Unidos anunciaram a contratação de patriotas brasileiros donos de jetski para escoar petróleo pelo Estreito de Ormuz. A operação, batizada de "Frota Patriótica", contará com especialistas em andar de jetski nas praias de Balneário Camboriú (também conhecida como "Dubai brasileira", por motivos que ninguém explica). A logística é simples, segundo o Pentágono: os patriotas brasileiros deverão amarrar um barril de petróleo nas costas, segurar mais um barril em cada mão... e também carregar uma bandeira americana. O problema? Os patriotas já estão com as mãos ocupadas.</p>
+                    
+                    <div class="stats-container">
+                        <div class="stat-box" style="background: #f0f5ff; border-color: #adc6ff;">
+                            <span class="stat-number" style="color: #2f54eb;">47</span>
+                            <span class="stat-label">Jetskis convocados</span>
+                        </div>
+                        <div class="stat-box" style="background: #f0f5ff; border-color: #adc6ff;">
+                            <span class="stat-number" style="color: #2f54eb;">3 barris</span>
+                            <span class="stat-label">Por jetski (mãos ocupadas)</span>
+                        </div>
+                        <div class="stat-box" style="background: #f0f5ff; border-color: #adc6ff;">
+                            <span class="stat-number" style="color: #2f54eb;">"E a bandeira?"</span>
+                            <span class="stat-label">Pergunta dos patriotas</span>
+                        </div>
+                    </div>
+                    
+                    <div class="special-alert" style="border-color: #1890ff; background: linear-gradient(135deg, #e6f7ff 0%, #f0f9ff 100%);">
+                        <div class="alert-header">
+                            <div class="alert-icon">🇺🇸</div>
+                            <h4 class="alert-title" style="color: #1890ff;">O DRAMA DA BANDEIRA (QUE NINGUÉM RESOLVEU)</h4>
+                        </div>
+                        
+                        <div class="fake-quote" style="margin: 5px 0;">
+                            "Eu topo na hora. Jetski, petróleo, Estreito de Ormuz. Sou patriota. Mas aí eles falaram: 'Segura um barril nas costas, um em cada mão e ainda carrega a bandeira americana'. Eu falei: 'Com qual mão?'. Eles: 'Com a que sobrar'. Eu falei: 'Não sobra nenhuma, porra'. Eles: 'Aí é problema seu. O patriotismo exige sacrifício'. Eu falei: 'Vou amarrar a bandeira na cabeça'. Eles: 'Pode. Só não pode cair. Se cair, é traição'."
+                            <span class="quote-author">— Patriota brasileiro (agora herói ou otário, ainda não decidiram)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="impact-list">
+                        <h5>AS PREOCUPAÇÕES DOS PATRIOTAS (ALÉM DA BANDEIRA):</h5>
+                        <ul>
+                            <li>"O Estreito de Ormuz tem onda? Porque jetski com onda é diferente."</li>
+                            <li>"O petróleo é leve? Porque 47kg nas costas mais 47kg em cada mão... meu jetski afunda."</li>
+                            <li>"Quem paga o combustível? O barril de petróleo? Posso usar o petróleo? Porque se puder, tô feito."</li>
+                            <li>"Tem seguro? Se eu capotar, o governo cobre? Ou é por minha conta? Porque jetski zero é caro."</li>
+                            <li>"A bandeira pode ser de pano? Ou tem que ser de fibra? Porque se for de fibra, pesa 5kg. Aí lascou."</li>
+                        </ul>
+                    </div>
+                    
+                    <p class="news-text">O Pentágono, ao ser questionado sobre os detalhes logísticos, respondeu: "Estamos estudando a possibilidade de os patriotas usarem a boca para segurar a bandeira. Ou os dentes. Ou um capacete com suporte. Vamos resolver. Confiem no processo. E no patriotismo." Enquanto isso, os jetskis já estão sendo preparados em Balneário Camboriú. A expectativa é de que a "Frota Patriótica" parta ainda nesta semana. Ou na outra. Ou nunca. Depende da maré. E da bandeira.</p>
+                </article>
+
+                <!-- NOTÍCIA 6: POLÍTICOS BEBENDO DETERGENTE -->
+                <article class="news-item">
+                    <h3 class="section-title">SAÚDE PÚBLICA & MARKETING</h3>
+                    <h4 class="news-title">Após onda de políticos bebendo detergente, empresas lançam 'Kit Resiliência Líquida': detergente Ypê no vale-refeição e curso 'Como sobreviver à própria estupidez'</h4>
+                    <p class="news-text">Em meio à polêmica que envolveu a Anvisa, a Ypê e um batalhão de políticos que resolveram defender a marca da forma mais criativa possível (ingerindo detergente), o mercado corporativo viu uma oportunidade de ouro. "Se eles estão dispostos a beber produto de limpeza por convicção política, imagina o que não fariam por um aumento de produtividade?", comemorou um headhunter. O estopim foi a suspensão de lotes da Ypê pela Anvisa por risco de contaminação pela bactéria Pseudomonas aeruginosa — o que gerou 271 milhões de impactos digitais, número superior à população do Brasil.</p>
+                    
+                    <div class="stats-container">
+                        <div class="stat-box" style="background: #fff2e8; border-color: #ffbb96;">
+                            <span class="stat-number" style="color: #d4380d;">271 mi</span>
+                            <span class="stat-label">Impactos digitais</span>
+                        </div>
+                        <div class="stat-box" style="background: #fff2e8; border-color: #ffbb96;">
+                            <span class="stat-number" style="color: #d4380d;">18,5 mi</span>
+                            <span class="stat-label">Nikolas Ferreira (sozinho)</span>
+                        </div>
+                        <div class="stat-box" style="background: #fff2e8; border-color: #ffbb96;">
+                            <span class="stat-number" style="color: #d4380b;">"Não bebam"</span>
+                            <span class="stat-label">Conselho do Ministro Padilha</span>
+                        </div>
+                    </div>
+                    
+                    <div class="special-alert" style="background: linear-gradient(135deg, #e6f7ff 0%, #f0f9ff 100%); border-color: #1890ff;">
+                        <div class="alert-header">
+                            <div class="alert-icon">🧴</div>
+                            <h4 class="alert-title">KIT RESILIÊNCIA LÍQUIDA: O PACOTE CORPORATIVO</h4>
+                        </div>
+                        <p class="news-text" style="font-style: italic; margin: 10px 0;">
+                            "Percebemos que há um público disposto a fazer qualquer coisa por convicção — ou por engajamento. Resolvemos canalizar essa energia para o ambiente de trabalho", explicou o CEO de uma startup de RH. O pacote inclui: detergente Ypê no vale-refeição ("já que tão tomando mesmo, pelo menos a gente economiza no almoço"), curso online "Como sobreviver à sua própria estupidez: lições do caso Ypê para o mercado de trabalho" (47 horas de duração), plano de saúde bucal especializado em remover gosto de produto de limpeza do paladar e o selo "Great Place to Drink Detergent" — agora com validação política.
+                        </p>
+                    </div>
+                    
+                    <div class="impact-list">
+                        <h5>RESUMO DO CAOS (PRA QUEM NÃO TAVA AQUI):</h5>
+                        <ul>
+                            <li><strong>O gatilho:</strong> Anvisa suspende lotes da Ypê por risco de contaminação</li>
+                            <li><strong>A reação:</strong> Apoiadores políticos bebem detergente em protesto (vídeos inclusive passando no cabelo e no corpo)</li>
+                            <li><strong>O alcance:</strong> 271 milhões de impactos — mais que a população do Brasil</li>
+                            <li><strong>O recordista:</strong> Nikolas Ferreira sozinho acumulou 18,5 milhões de impactos em um post</li>
+                            <li><strong>A médica:</strong> Luana Araujo: "desinformação dolosa é crime contra a saúde pública"</li>
+                            <li><strong>O ministro:</strong> Padilha: "Anvisa não tem lado partidário. Não bebam detergente."</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="fake-quote">
+                        "O problema não é o político que brinca com detergente — ele não bebe. O problema é quem assiste, acredita e vai lavar o frango com detergente porque achou que estava endossado."
+                        <span class="quote-author">— Daniela Lima, jornalista</span>
+                    </div>
+                    
+                    <p class="news-text">A Ypê, por sua vez, triplicou o atendimento no SAC para lidar com a demanda. O Ministro da Saúde, Alexandre Padilha, alertou: "Anvisa não tem lado partidário. Suspendeu o detergente porque ele estava contaminado. Não bebam detergente de nenhuma marca". Enquanto isso, nas empresas, o RH já adotou uma nova pergunta no onboarding: "Você já bebeu detergente por motivação política? Se sim, parabéns, você está acima da média de resiliência. Se não, ainda há tempo de aprender. O curso começa na semana que vem."</p>
+                </article>
+
+                <!-- NOTÍCIA 7: RÚSSIA DECLARA VITÓRIA NA GUERRA (ÚLTIMA DA DIREITA) -->
+                <article class="news-item">
+                    <h3 class="section-title">GEOPOLÍTICA & DEBOCHES</h3>
+                    <h4 class="news-title">Rússia entra na trend americana e declara vitória na guerra contra o Irã: "Estamos curiosos pra ver se os EUA vão nos contrariar", diz Putin em tom de deboche</h4>
+                    <p class="news-text">Em uma jogada digna de reality show geopolítico, a Rússia anunciou oficialmente sua "vitória avassaladora" na guerra contra o Irã — conflito do qual nem participava até semana passada. "Os Estados Unidos já declararam vitória tantas vezes que a gente perdeu a conta. Achávamos que era algum tipo de brincadeira. Então resolvemos entrar na brincadeira também. Declaramos vitória. Agora estamos curiosos para ver se os EUA vão nos contrariar", disse o ministro das Relações Exteriores russo, em coletiva.</p>
+                    
+                    <div class="stats-container">
+                        <div class="stat-box" style="background: #f0f5ff; border-color: #adc6ff;">
+                            <span class="stat-number" style="color: #2f54eb;">47</span>
+                            <span class="stat-label">Vitórias americanas declaradas</span>
+                        </div>
+                        <div class="stat-box" style="background: #f0f5ff; border-color: #adc6ff;">
+                            <span class="stat-number" style="color: #2f54eb;">1</span>
+                            <span class="stat-label">Vitória russa (de mentirinha)</span>
+                        </div>
+                        <div class="stat-box" style="background: #f0f5ff; border-color: #adc6ff;">
+                            <span class="stat-number" style="color: #2f54eb;">0</span>
+                            <span class="stat-label">Guerras resolvidas</span>
+                        </div>
+                    </div>
+                    
+                    <div class="special-alert" style="background: linear-gradient(135deg, #e6f7ff 0%, #f0f9ff 100%); border-color: #1890ff;">
+                        <div class="alert-header">
+                            <div class="alert-icon">🇷🇺</div>
+                            <h4 class="alert-title">O DEBOCHRE PUTIN</h4>
+                        </div>
+                        <p class="news-text" style="font-style: italic; margin: 10px 0;">
+                            "Os americanos declararam vitória 47 vezes. Em 47 momentos diferentes. Com 47 narrativas diferentes. Nós resolvemos simplificar: declaramos uma vez só. Vitória. Pronto. Agora esperamos que eles nos contradigam. Porque se eles nos contradisserem, vão ter que admitir que também não venceram. É um xadrez 4D. Ou 4D de mentirinha. Mas o deboche, esse é real."
+                        </p>
+                        <p class="news-text" style="font-style: italic; margin: 10px 0;">
+                            "Putin ligou pessoalmente para Trump para comunicar a vitória russa. Dizem que Trump respondeu: 'Parabéns. Nós também vencemos. 47 vezes. Conta outra?' Aí Putin desligou. Era trote. Ele sabia. Foi deboche puro."
+                        </p>
+                    </div>
+                    
+                    <div class="fake-quote">
+                        "Eu achei que dar um ultimato ia resolver. Aí eles não resolveram. Aí eu pensei: 'Vou dar outro ultimato'. Também não resolveu. Agora os russos tão declarando vitória. O que eu faço? Declaro também? Declaro mais forte? Declaro com mais letras maiúsculas? Tô perdido. Alguém me dá um café. Ou um detergente. Tanto faz."
+                        <span class="quote-author">— Donald Trump (simulado por IA, porque ele já não sabe mais onde está)</span>
+                    </div>
+                    
+                    <p class="news-text">O Irã, por sua vez, respondeu com um comunicado de uma linha: "Vocês tão brigando entre si? A gente só quer vender petróleo. Podem declarar vitória à vontade. A gente declara derrota. Tá bom? Podem ir pra casa. Tchau." A declaração iraniana foi amplamente ignorada. Enquanto isso, a ONU já prepara uma comissão especial para "acompanhar a trend de declarações de vitória". O Pasquim, claro, vai acompanhar. E torcer. E rir. Muito.</p>
+                </article>
+
+                <!-- CLASSIFICADOS -->
+                <article class="news-item">
+                    <h3 class="section-title">CLASSIFICADOS</h3>
+                    
+                    <div class="special-alert" style="border-color: #52c41a; background: linear-gradient(135deg, #f6ffed 0%, #f0ffeb 100%);">
+                        <div class="alert-header">
+                            <div class="alert-icon">📋</div>
+                            <h4 class="alert-title" style="color: #389e0d;">OPORTUNIDADES ÚNICAS (OU NEM TANTO)</h4>
+                        </div>
+                        
+                        <div class="classified">
+                            <p><strong>ALMOÇO ITALIANO SOLIDÁRIO:</strong> Traga sua própria conta. O CEO paga o dele. Você paga o seu. Solidariedade é isso: cada um com seus problemas. E com sua fome. Incluso: massas (pagas por você). Excluso: bebidas, couvert, dignidade.</p>
+                            
+                            <p><strong>JORNADA TRUMP:</strong> Vaga para trabalho 12h/dia. Benefícios: café de graça (1 copo por dia, sem açúcar). Salário: o mesmo de sempre. Por que você aceitaria? Porque precisa pagar o almoço italiano.</p>
+                            
+                            <p><strong>IA DE RH:</strong> Contratamos IAs. Requisitos: saber processar currículos, ignorar humanos e nunca pedir aumento. Benefícios: não precisa de férias, nem de 13º, nem de dignidade. Envie seu currículo (gerado por IA) para ia@rhautomacao.com.br. Não aceitamos humanos. Eles são muito ineficientes.</p>
+                            
+                            <p><strong>PACOTE DE GRATIDÃO:</strong> Demita seus funcionários sem pagar nada! Inclui: e-mail personalizado, playlist motivacional e um abraço virtual (GIF de ursinhos). Aceitamos pagamento em... gratidão. Obrigado.</p>
+                            
+                            <p><strong>FROTA PATRIÓTICA:</strong> Vaga para piloto de jetski. Requisitos: saber andar de jetski em Balneário Camboriú, ter 47 braços (para carregar barris) e não perguntar onde colocar a bandeira. Aceitamos voluntários. Pagamento: 1 bandeira americana (de brinde).</p>
+
+                            <p><strong>DETERGENTE YPÊ:</strong> Lote promocional! Beba você também. Ou use na louça. Ou no cabelo (se você for político). Não nos responsabilizamos por intoxicação, queimaduras ou perda de sanidade mental. O curso "Como sobreviver à própria estupidez" está incluso (se você sobreviver).</p>
+
+                            <p><strong>DECLARAÇÃO DE VITÓRIA:</strong> Vendo declarações de vitória para qualquer guerra. Não precisa participar do conflito. Aceito qualquer valor. Promoção: leve 47 e pague 47 (ou seja, leve 1 e pague 47). Motivo: porque sim.</p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <!-- FIM DA COLUNA DA DIREITA -->
+        </div>
+        <!-- FIM DO LAYOUT DE DUAS COLUNAS -->
+
+        <!-- RODAPÉ PRINCIPAL -->
+        <footer class="newspaper-footer">
+            <hr class="divider-thin">
+            <div class="disclaimer">
+                ⚠️ <strong>AVISO LEGAL (OU NÃO):</strong> Este jornal é uma obra de ficção satírica. Nenhum banco almoçou com demitido (até onde sabemos). A Rússia não declarou vitória (mas seria engraçado). A jornada Trump é real? Não. A Frota Patriótica também não. O detergente? Esse é real. E contaminado. E político (agora). As IAs não existem (ou será que existem?). O pacote de gratidão? Ainda não, mas não duvide. Não bebam detergente, por favor. Não confiem em robôs. Não declarem vitórias em guerras que não participaram. E não aceitem gratidão como pagamento. Obrigado. E não, não estamos gratidão. Estamos obrigado. Sempre obrigado.
+            </div>
+            <div class="meme-tag">
+                #PasquimCorporativo | #HumorQueDóiDeVerdade | #SextouNoLinkedIn | #FakeNewsDeQualidade
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const editionElement = document.querySelector(".edition-number");
+            if (editionElement) {
+                editionElement.textContent = "EDIÇÃO #016";
+            }
+            
+            const specialAlerts = document.querySelectorAll('.special-alert');
+            specialAlerts.forEach(alert => {
+                alert.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-2px)';
+                    this.style.boxShadow = '0 6px 12px rgba(255, 77, 79, 0.2)';
+                    this.style.transition = 'all 0.3s ease';
+                });
+                alert.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = 'none';
+                });
+            });
+        });
+    </script>
+    <footer style="margin-top: 40px; text-align: center; padding: 20px; border-top: 1px solid #ddd;">
+        <p><a href="../arquivo.html">📚 Ver todas as edições anteriores</a> | <a href="#top">↑ Topo</a></p>
+        <p style="font-size: 12px; color: #666;">© 2026 O Pasquim Corporativo • Toda sexta tem edição nova • Edição #016 • Almoço italiano: cada um paga o seu • Jornada Trump: 12h/dia • IA contratando IA • Pacote de gratidão: pague com emoção • Frota Patriótica: cadê a bandeira? • Detergente: o novo café do trabalhador • Rússia: vitória de mentirinha • Não bebam detergente • Não confiem em robôs • Não aceitem gratidão • Gratidão? Obrigado.</p>
+    </footer>
+</body>
+</html>
